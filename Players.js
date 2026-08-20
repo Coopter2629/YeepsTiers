@@ -9,7 +9,7 @@ export const players = [
       "Double Bat": "A+",
       "Freeze Glove": "C",
       "SMP": "D",
-      "Scythe": "D+"
+      "Scythe": "D"
     }
   },
   
