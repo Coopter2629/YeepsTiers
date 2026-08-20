@@ -78,11 +78,8 @@ a{color:inherit;}
 /* category tabs */
 .tabs{
   max-width:var(--maxw);margin:0 auto;padding:22px 24px 0;
-  display:flex;gap:8px;overflow-x:auto;
-  scrollbar-width:none;      /* Firefox */
-  -ms-overflow-style:none;   /* old Edge/IE */
+  display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;
 }
-.tabs::-webkit-scrollbar{display:none;}  /* Chrome/Safari/new Edge */
 .tab{
   flex:0 0 auto;display:flex;align-items:center;gap:7px;
   background:linear-gradient(165deg, rgba(20,20,20,0.6), rgba(0,0,0,0.5));
@@ -182,36 +179,6 @@ a{color:inherit;}
 .modal-cat-chip img{width:22px;height:22px;border-radius:5px;object-fit:cover;}
 
 footer{max-width:var(--maxw);margin:0 auto;padding:10px 24px 32px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
-
-/* ---------- mobile ---------- */
-@media(max-width:640px){
-  .topbar{padding:16px 16px 0;}
-  .brand img{width:34px;height:34px;}
-  .brand-name{font-size:16px;}
-  .brand-sub{font-size:9px;}
-
-  .page-head{padding:22px 16px 0;gap:12px;}
-  .page-head h1{font-size:24px;}
-  .search{width:100%;min-width:0;}
-
-  .tabs{padding:16px 16px 0;}
-  .tab{padding:8px 11px;font-size:12px;}
-
-  .content{padding:18px 16px 40px;}
-
-  .overall-row{padding:10px 12px;gap:10px;}
-  .overall-avatar{width:38px;height:38px;}
-  .overall-name{font-size:14px;}
-  .overall-title{font-size:11px;}
-  .overall-score{font-size:13px;}
-  .overall-info{overflow:hidden;}
-  .overall-name,.overall-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-
-  .player-grid{gap:8px;}
-  .player-chip{min-width:0;flex:1 1 calc(50% - 8px);padding:7px 10px 7px 7px;}
-
-  .modal-card{padding:16px;width:100%;}
-}
 </style>
 </head>
 <body>
