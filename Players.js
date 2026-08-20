@@ -1,6 +1,6 @@
 export const players = [
   {
-    name: "",
+    name: "Madeo",
     image: "images/pfp.png",
     ranks: {
       "Shield": "S+",
