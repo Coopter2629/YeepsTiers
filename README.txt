@@ -1,1 +1,0 @@
-Put your home hero image here as hero.jpg. Put player portraits in the players folder.
