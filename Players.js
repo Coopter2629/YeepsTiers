@@ -18,7 +18,7 @@ export const players = [
   {
     name: "Woopergubbyyeeps",
     image: "",
-    ranks: {Jew
+    ranks: {
       "Shield": "F-",
       "Dagger": "F-",
       "Mace": "F-",
