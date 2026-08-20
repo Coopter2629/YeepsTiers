@@ -41,5 +41,19 @@ export const players = [
       "Scythe": ""
     }
   },
+  
+  {
+    name: "DolfPin",
+    image: "",
+    ranks: {
+      "Shield": "",
+      "Dagger": "",
+      "Mace": "B",
+      "Double Bat": "C",
+      "Freeze Glove": "B+",
+      "SMP": "A",
+      "Scythe": "B"
+    }
+  },
 ];
  
