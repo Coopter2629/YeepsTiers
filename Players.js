@@ -4,12 +4,12 @@ export const players = [
     image: "",
     ranks: {
       "Shield": "S+",
-      "Dagger": "",
-      "Mace": "",
-      "Double Bat": "",
-      "Freeze Glove": "C",
-      "SMP": "",
-      "Scythe": ""
+      "Dagger": "S+",
+      "Mace": "S+",
+      "Double Bat": "S+",
+      "Freeze Glove": "S+",
+      "SMP": "S+",
+      "Scythe": "S+"
     }
   },
 ];
