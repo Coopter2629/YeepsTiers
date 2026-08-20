@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Rankings — Yeeps Tiers</title>
+<link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+<meta name="description" content="Yeeps PvP rankings by category and tier." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0b0d;
+  --panel:#0f1720;
+  --slate:#36394C;
+  --muted:#94a3b8;
+  --accent:#576077;
+  --accent-2:#77797B;
+  --blood:#960330;
+  --blood-bright:#c8083f;
+  --radius:14px;
+  --shadow: 0 6px 18px rgba(2,6,23,0.6);
+  --maxw:1180px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto;
+}
+*{box-sizing:border-box;}
+html,body{overflow-x:hidden;}
+body{
+  margin:0;
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(150,3,48,0.16), transparent 60%),
+    linear-gradient(165deg,var(--bg) 0%, var(--slate) 100%);
+  color:#e6eef6;
+  min-height:100vh;
+  width:100%;
+}
+h1,h2,h3{font-family:"Rajdhani", Inter, sans-serif;letter-spacing:0.01em;margin:0;}
+a{color:inherit;}
+
+/* topbar (matches index.html) */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  max-width:var(--maxw);margin:0 auto;padding:22px 24px 0;
+}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.brand img{width:42px;height:42px;border-radius:10px;object-fit:cover;box-shadow:0 0 0 1px rgba(255,255,255,0.06);}
+.brand-name{font-family:"Rajdhani",sans-serif;font-weight:700;font-size:20px;letter-spacing:0.02em;}
+.brand-sub{font-size:11px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:-2px;}
+.top-links{display:flex;gap:8px;align-items:center;}
+.top-links a{
+  font-size:13px;font-weight:600;color:var(--muted);padding:8px 12px;border-radius:8px;text-decoration:none;
+  transition:color .15s ease, background .15s ease;
+}
+.top-links a:hover{color:#fff;background:rgba(255,255,255,0.04);}
+.top-links a.current{color:#fff;background:rgba(255,255,255,0.06);}
+.discord-pill{
+  display:flex;align-items:center;gap:8px;
+  background:linear-gradient(160deg, var(--blood-bright), var(--blood));
+  color:#fff !important;padding:9px 16px;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;
+  box-shadow:0 4px 14px rgba(150,3,48,0.35);
+}
+.discord-pill img{width:16px;height:16px;}
+@media(max-width:760px){.top-links a:not(.discord-pill){display:none;}}
+
+/* page head */
+.page-head{
+  max-width:var(--maxw);margin:0 auto;padding:34px 24px 0;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;
+}
+.page-head h1{font-size:32px;font-weight:700;}
+.page-head p{color:var(--muted);font-size:13px;margin-top:6px;}
+.search{
+  background:linear-gradient(165deg,var(--panel), var(--slate));
+  border-radius:10px;padding:9px 14px;min-width:220px;
+  border:1px solid rgba(255,255,255,0.05);
+}
+.search input{background:transparent;border:0;color:inherit;outline:none;width:100%;font-size:13px;}
+
+/* category tabs */
+.tabs{
+  max-width:var(--maxw);margin:0 auto;padding:22px 24px 0;
+  display:flex;gap:8px;overflow-x:auto;
+  scrollbar-width:none;      /* Firefox */
+  -ms-overflow-style:none;   /* old Edge/IE */
+}
+.tabs::-webkit-scrollbar{display:none;}  /* Chrome/Safari/new Edge */
+.tab{
+  flex:0 0 auto;display:flex;align-items:center;gap:7px;
+  background:linear-gradient(165deg, rgba(20,20,20,0.6), rgba(0,0,0,0.5));
+  border:1px solid rgba(255,255,255,0.05);
+  padding:9px 14px;border-radius:999px;
+  font-size:13px;font-weight:600;color:var(--muted);
+  cursor:pointer;white-space:nowrap;
+  transition:all .15s ease;
+}
+.tab img{width:18px;height:18px;border-radius:5px;object-fit:cover;}
+.tab:hover{color:#fff;border-color:rgba(255,255,255,0.15);}
+.tab.active{
+  color:#fff;
+  border-color:rgba(150,3,48,0.55);
+  background:linear-gradient(160deg, rgba(150,3,48,0.35), rgba(150,3,48,0.08));
+}
+
+/* content */
+.content{max-width:var(--maxw);margin:0 auto;padding:26px 24px 60px;}
+
+/* overall list view */
+.overall-row{
+  display:flex;align-items:center;gap:14px;
+  background: linear-gradient(165deg, rgba(20,20,20,0.65), rgba(0,0,0,0.5));
+  border:1px solid rgba(255,255,255,0.05);
+  border-radius:12px;padding:12px 16px;margin-bottom:10px;
+  cursor:pointer;transition:transform .15s ease, border-color .15s ease;
+}
+.overall-row:hover{transform:translateY(-2px);border-color:rgba(150,3,48,0.4);}
+.overall-rank{font-size:18px;font-weight:800;min-width:34px;color:var(--accent-2);}
+.overall-rank.gold{color:#FFD700;text-shadow:0 0 8px #FFD700;}
+.overall-rank.silver{color:#C0C0C0;text-shadow:0 0 8px #C0C0C0;}
+.overall-rank.bronze{color:#CD7F32;text-shadow:0 0 8px #CD7F32;}
+.overall-avatar{width:44px;height:44px;border-radius:10px;object-fit:cover;background:var(--panel);}
+.overall-info{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0;}
+.overall-name{font-weight:700;font-size:15px;}
+.overall-title{font-size:12px;color:var(--muted);}
+.overall-score{font-weight:800;font-size:14px;color:#fff;}
+
+/* tier-grid view (mctiers style) */
+.tier-block{margin-bottom:22px;}
+.tier-head{
+  display:flex;align-items:center;gap:10px;
+  padding:8px 4px;margin-bottom:10px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.tier-badge{
+  font-family:"Rajdhani",sans-serif;font-weight:700;font-size:15px;
+  padding:4px 12px;border-radius:999px;
+  background:linear-gradient(160deg,var(--blood-bright),var(--blood));
+  color:#fff;
+}
+.tier-count{font-size:12px;color:var(--muted);}
+.tier-block.unranked .tier-badge{background:linear-gradient(160deg,var(--accent),var(--bg));}
+
+.player-grid{
+  display:flex;flex-wrap:wrap;gap:10px;
+}
+.player-chip{
+  display:flex;align-items:center;gap:10px;
+  background: linear-gradient(165deg, rgba(20,20,20,0.65), rgba(0,0,0,0.5));
+  border:1px solid rgba(255,255,255,0.05);
+  border-radius:12px;padding:8px 14px 8px 8px;
+  cursor:pointer;transition:transform .15s ease, border-color .15s ease;
+  min-width:170px;
+}
+.player-chip:hover{transform:translateY(-2px);border-color:rgba(150,3,48,0.4);}
+.player-chip img{width:36px;height:36px;border-radius:9px;object-fit:cover;background:var(--panel);}
+.player-chip .pc-name{font-weight:700;font-size:14px;}
+.player-chip .pc-sub{font-size:11px;color:var(--muted);}
+.player-chip.retired{opacity:0.6;}
+.player-chip.retired .pc-sub::after{content:" · Retired";}
+
+.empty-state{
+  color:var(--muted);font-size:13px;text-align:center;padding:40px 0;
+}
+
+/* modal */
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);justify-content:center;align-items:center;z-index:100;}
+.modal.active{display:flex;}
+.modal-card{
+  background: linear-gradient(-160deg, var(--panel), var(--slate));
+  border-radius:var(--radius);padding:20px;width:380px;max-width:90%;
+  display:flex;flex-direction:column;gap:12px;position:relative;
+}
+.modal-card img.modal-avatar{width:56px;height:56px;border-radius:12px;object-fit:cover;}
+.modal-close{position:absolute;top:12px;right:14px;background:transparent;border:none;font-size:20px;cursor:pointer;color:#fff;}
+.modal-name{font-size:18px;font-weight:700;}
+.modal-rank{display:flex;align-items:center;gap:6px;font-weight:700;color:var(--blood-bright);font-size:13px;}
+.modal-rank img{width:18px;height:18px;}
+.modal-score{font-weight:600;font-size:13px;color:var(--muted);}
+.modal-cats{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+.modal-cat-chip{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.04);border-radius:8px;padding:5px 9px;font-size:11px;color:var(--muted);
+}
+.modal-cat-chip img{width:22px;height:22px;border-radius:5px;object-fit:cover;}
+
+footer{max-width:var(--maxw);margin:0 auto;padding:10px 24px 32px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+/* ---------- mobile ---------- */
+@media(max-width:640px){
+  .topbar{padding:16px 16px 0;}
+  .brand img{width:34px;height:34px;}
+  .brand-name{font-size:16px;}
+  .brand-sub{font-size:9px;}
+
+  .page-head{padding:22px 16px 0;gap:12px;}
+  .page-head h1{font-size:24px;}
+  .search{width:100%;min-width:0;}
+
+  .tabs{padding:16px 16px 0;}
+  .tab{padding:8px 11px;font-size:12px;}
+
+  .content{padding:18px 16px 40px;}
+
+  .overall-row{padding:10px 12px;gap:10px;}
+  .overall-avatar{width:38px;height:38px;}
+  .overall-name{font-size:14px;}
+  .overall-title{font-size:11px;}
+  .overall-score{font-size:13px;}
+  .overall-info{overflow:hidden;}
+  .overall-name,.overall-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+  .player-grid{gap:8px;}
+  .player-chip{min-width:0;flex:1 1 calc(50% - 8px);padding:7px 10px 7px 7px;}
+
+  .modal-card{padding:16px;width:100%;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="index.html">
+    <img id="brandLogo" src="" alt="" />
+    <div>
+      <div class="brand-name" id="brandName"></div>
+      <div class="brand-sub" id="brandSub"></div>
+    </div>
+  </a>
+  <div class="top-links" id="topLinks"></div>
+</div>
+
+<div class="page-head">
+  <div>
+    <h1>PvP Rankings</h1>
+    <p>Every category, every tier — pick a weapon below.</p>
+  </div>
+  <div class="search"><input id="search" placeholder="Search player..." /></div>
+</div>
+
+<div class="tabs" id="tabs"></div>
+
+<div class="content" id="content"></div>
+
+<footer>
+  <span id="footerLeft"></span>
+  <span id="footerRight"></span>
+</footer>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <button class="modal-close" id="modalClose">✕</button>
+    <img class="modal-avatar" id="modalAvatar" src="" alt="" />
+    <div class="modal-name" id="modalName"></div>
+    <div class="modal-rank"><img id="modalRankImg" src="" alt="" /><span id="modalRank"></span></div>
+    <div class="modal-score" id="modalScore"></div>
+    <div class="modal-cats" id="modalCats"></div>
+  </div>
+</div>
+
+<script type="module">
+import { players } from "./Players.js";
+
+/* =====================================================================
+   EDIT HERE
+   ---------------------------------------------------------------------
+   - To change site branding/nav links, edit pageConfig below.
+   - To change which category tabs exist, edit categories below. Each
+     "catName" must exactly match a "cat" value used in Players.js.
+   - To add/edit players themselves, go edit Players.js — this file
+     never needs to change for a roster update.
+   ===================================================================== */
+
+const pageConfig = {
+  brand: {
+    logo: "https://yeeplist.page.gd/images/PvP_Rank.jpeg",
+    name: "Yeeps Tiers",
+    sub: "The Yeeps List"
+  },
+  topLinks: [
+    { label: "Rankings",     href: "Ranks.html", current: true },
+    { label: "Teams",        href: "Teams.html" },
+    { label: "Player Cards", href: "Card.html" },
+    { label: "LTMs",         href: "ltm.html" }
+  ],
+  discord: {
+    label: "Join Discord",
+    url: "https://discord.gg/7mry9QQCGH",
+    icon: "https://yeeplist.page.gd/images/Discord.jpeg"
+  },
+  footer: {
+    left: "The Yeeps List — not affiliated with Trass Games",
+    right: "V2.0 Pre-release 1"
+  }
+};
+
+// Tabs shown across the top. "catName: null" means the aggregate
+// Overall view (sorted by score instead of grouped by tier).
+const categories = [
+  { key: "overall", label: "Overall",         catName: null,                   icon: "https://yeeplist.page.gd/images/PvP_Rank.jpeg" },
+  { key: "bat",      label: "Bat PvP",         catName: "Bat PvP",              icon: "https://yeeplist.page.gd/images/Bat_Tier4.png" },
+  { key: "dagger",   label: "Dagger PvP",      catName: "Dagger PvP",           icon: "https://yeeplist.page.gd/images/PvP_Rank.jpeg" },
+  { key: "glove",    label: "Freeze Glove PvP",catName: "Freeze Glove PvP",     icon: "https://yeeplist.page.gd/images/Freeze_Glove.png" },
+  { key: "mace",     label: "Mace PvP",        catName: "Mace PvP",             icon: "https://yeeplist.page.gd/images/SwarmSlayer.jpg" },
+  { key: "shield",   label: "Shield PvP",      catName: "Shield + Weapon PvP",  icon: "https://yeeplist.page.gd/images/Tier3.png" },
+  { key: "fire",     label: "Fire Axe PvP",    catName: "Fire Axe PvP",         icon: "https://yeeplist.page.gd/images/Desert.png" },
+  { key: "scythe",   label: "Scythe PvP",      catName: "Scythe PvP",           icon: "https://yeeplist.page.gd/images/Horror.jpg" },
+  { key: "baseball", label: "Baseball PvP",    catName: "Baseball PvP",         icon: "https://yeeplist.page.gd/images/placeholder.png" },
+  { key: "other",    label: "Other PvP",       catName: "Other PvP",            icon: "https://yeeplist.page.gd/images/placeholder.png" }
+];
+/* ===================== end of editable section ===================== */
+
+
+let activeKey = categories[0].key;
+
+function el(tag, attrs = {}, html) {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
+  if (html !== undefined) node.innerHTML = html;
+  return node;
+}
+
+/* ---- topbar ---- */
+document.getElementById("brandLogo").src = pageConfig.brand.logo;
+document.getElementById("brandName").textContent = pageConfig.brand.name;
+document.getElementById("brandSub").textContent = pageConfig.brand.sub;
+const topLinks = document.getElementById("topLinks");
+pageConfig.topLinks.forEach(l => {
+  topLinks.appendChild(el("a", { href: l.href, class: l.current ? "current" : "" }, l.label));
+});
+topLinks.appendChild(el("a", {
+  class: "discord-pill", href: pageConfig.discord.url, target: "_blank", rel: "noopener"
+}, `<img src="${pageConfig.discord.icon}" alt="" /> ${pageConfig.discord.label}`));
+document.getElementById("footerLeft").textContent = pageConfig.footer.left;
+document.getElementById("footerRight").textContent = pageConfig.footer.right;
+
+/* ---- tabs ---- */
+const tabsEl = document.getElementById("tabs");
+categories.forEach(c => {
+  const tab = el("div", { class: "tab" + (c.key === activeKey ? " active" : "") },
+    `<img src="${c.icon}" alt="" />${c.label}`);
+  tab.onclick = () => {
+    activeKey = c.key;
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    render();
+  };
+  tabsEl.appendChild(tab);
+});
+
+/* ---- tier parsing ---- */
+function tierOf(pos) {
+  if (!pos) return null;
+  const m = pos.match(/tier[^0-9]*([0-9]+)/i);
+  return m ? parseInt(m[1], 10) : null;
+}
+function isRetired(pos) {
+  return !!pos && /retired/i.test(pos);
+}
+
+/* ---- rendering ---- */
+const content = document.getElementById("content");
+const searchInput = document.getElementById("search");
+searchInput.oninput = render;
+
+function render() {
+  const cat = categories.find(c => c.key === activeKey);
+  const q = searchInput.value.trim().toLowerCase();
+  content.innerHTML = "";
+
+  if (cat.catName === null) {
+    renderOverall(q);
+  } else {
+    renderTierGrid(cat.catName, q);
+  }
+}
+
+function renderOverall(q) {
+  let list = players.filter(p => !q || p.name.toLowerCase().includes(q));
+  list.sort((a, b) => b.score - a.score);
+
+  let lastScore = null, rank = 0;
+  list.forEach((p, i) => {
+    if (p.score !== lastScore) rank = i + 1;
+    lastScore = p.score;
+
+    let rankClass = "";
+    if (rank === 1) rankClass = "gold";
+    else if (rank === 2) rankClass = "silver";
+    else if (rank === 3) rankClass = "bronze";
+
+    const row = el("div", { class: "overall-row" }, `
+      <div class="overall-rank ${rankClass}">#${rank}</div>
+      <img class="overall-avatar" src="${p.avatar}" alt="" />
+      <div class="overall-info">
+        <div class="overall-name">${p.name}</div>
+        <div class="overall-title">${p.title}</div>
+      </div>
+      <div class="overall-score">${p.score}</div>
+    `);
+    row.onclick = () => openModal(p);
+    content.appendChild(row);
+  });
+
+  if (!list.length) content.appendChild(el("div", { class: "empty-state" }, "No players found."));
+}
+
+function renderTierGrid(catName, q) {
+  const relevant = players
+    .map(p => {
+      const entry = p.categories.find(c => c.cat === catName);
+      if (!entry) return null;
+      if (q && !p.name.toLowerCase().includes(q)) return null;
+      return { player: p, entry, tier: tierOf(entry.pos), retired: isRetired(entry.pos) };
+    })
+    .filter(Boolean);
+
+  const tiered = relevant.filter(r => r.tier !== null).sort((a, b) => {
+    if (a.tier !== b.tier) return a.tier - b.tier;
+    return b.player.score - a.player.score;
+  });
+  const unranked = relevant.filter(r => r.tier === null);
+
+  const tierNumbers = [...new Set(tiered.map(r => r.tier))].sort((a, b) => a - b);
+
+  tierNumbers.forEach(tierNum => {
+    const group = tiered.filter(r => r.tier === tierNum);
+    const block = el("div", { class: "tier-block" });
+    block.appendChild(el("div", { class: "tier-head" },
+      `<div class="tier-badge">Tier ${tierNum}</div><div class="tier-count">${group.length} player${group.length === 1 ? "" : "s"}</div>`));
+    const grid = el("div", { class: "player-grid" });
+    group.forEach(r => grid.appendChild(playerChip(r)));
+    block.appendChild(grid);
+    content.appendChild(block);
+  });
+
+  if (unranked.length) {
+    const block = el("div", { class: "tier-block unranked" });
+    block.appendChild(el("div", { class: "tier-head" },
+      `<div class="tier-badge">Unranked</div><div class="tier-count">${unranked.length} player${unranked.length === 1 ? "" : "s"}</div>`));
+    const grid = el("div", { class: "player-grid" });
+    unranked.forEach(r => grid.appendChild(playerChip(r)));
+    block.appendChild(grid);
+    content.appendChild(block);
+  }
+
+  if (!relevant.length) content.appendChild(el("div", { class: "empty-state" }, "No players found in this category."));
+}
+
+function playerChip(r) {
+  const chip = el("div", { class: "player-chip" + (r.retired ? " retired" : "") }, `
+    <img src="${r.player.avatar}" alt="" />
+    <div>
+      <div class="pc-name">${r.player.name}</div>
+      <div class="pc-sub">Score ${r.player.score}</div>
+    </div>
+  `);
+  chip.onclick = () => openModal(r.player);
+  return chip;
+}
+
+/* ---- modal ---- */
+const modal = document.getElementById("modal");
+function openModal(p) {
+  document.getElementById("modalAvatar").src = p.avatar;
+  document.getElementById("modalName").textContent = p.name;
+  document.getElementById("modalRankImg").src = p.rank;
+  document.getElementById("modalRank").textContent = p.title;
+  document.getElementById("modalScore").textContent = `Score: ${p.score}`;
+  const cats = document.getElementById("modalCats");
+  cats.innerHTML = "";
+  p.categories.forEach(c => {
+    cats.appendChild(el("div", { class: "modal-cat-chip" },
+      `<img src="${c.img}" alt="" />${c.cat}${c.pos ? " • " + c.pos : ""}`));
+  });
+  modal.classList.add("active");
+}
+document.getElementById("modalClose").onclick = () => modal.classList.remove("active");
+modal.onclick = e => { if (e.target === modal) modal.classList.remove("active"); };
+
+render();
+</script>
+</body>
+</html>
