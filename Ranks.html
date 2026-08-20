@@ -27,7 +27,10 @@ let activeCategory="Overall",searchQuery="";
 const tabs=document.getElementById("tabs"),content=document.getElementById("content"),search=document.getElementById("search");
 const initials=name=>name.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
 const avatar=player=>`<div class="avatar">${player.image?`<img src="${player.image}" alt="${player.name}">`:initials(player.name)}</div>`;
-function calculateScore(player){const ranked=categories.filter(c=>c!=="Overall"&&player.ranks[c]);if(!ranked.length)return 0;const earned=ranked.reduce((sum,c)=>sum+(tierPoints[player.ranks[c]]||0),0);return Math.round(earned/(ranked.length*tierPoints["S+"])*1000)}
+function calculateScore(player){
+  const ranked = categories.filter(c => c !== "Overall" && player.ranks[c]);
+  return ranked.reduce((sum, c) => sum + (tierPoints[player.ranks[c]] || 0), 0);
+}
 function rankName(score){if(score>=950)return"Grandmaster";if(score>=850)return"Master";if(score>=750)return"Elite";if(score>=650)return"Diamond";if(score>=550)return"Platinum";if(score>=450)return"Gold";if(score>=300)return"Silver";return"Bronze"}
 function visiblePlayers(){return players.filter(p=>p.name.toLowerCase().includes(searchQuery.toLowerCase()))}
 function playerByName(name){return players.find(p=>p.name===name)}
