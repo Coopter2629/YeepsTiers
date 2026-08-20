@@ -1,0 +1,1 @@
+document.getElementById("year").textContent=new Date().getFullYear();const button=document.querySelector(".menu-button"),links=document.querySelector(".nav-links");if(button){button.addEventListener("click",()=>{const isOpen=links.classList.toggle("open");button.setAttribute("aria-expanded",isOpen)})}
