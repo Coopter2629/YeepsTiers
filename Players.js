@@ -27,7 +27,21 @@ export const players = [
       "Scythe": "A+"
     }
   },
-
+  
+{
+    name: "Madeo yeeps",
+    image: "",
+    ranks: {
+      "Shield": "A+",
+      "Dagger": "A+",
+      "Mace": "S",
+      "Double Bat": "S",
+      "Freeze Glove": "S",
+      "SMP": "S",
+      "Scythe": "S"
+    }
+  },
+  
   {
     name: "PlayerTwo",
     image: "",
