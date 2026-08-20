@@ -1,44 +1,17 @@
 export const players = [
   {
-    name: "test final",
+    name: "",
     image: "",
     ranks: {
-      "Shield": "S+",
-      "Dagger": "S+",
-      "Mace": "S+",
-      "Double Bat": "S+",
-      "Freeze Glove": "S+",
-      "SMP": "S+",
-      "Scythe": "S+"
-    }
-  },
-  
-    {
-    name: "testy",
-    image: "",
-    ranks: {
-      "Shield": "B",
-      "Dagger": "S+",
-      "Mace": "S",
-      "Double Bat": "D",
-      "Freeze Glove": "C",
-      "SMP": "B+",
-      "Scythe": "A+"
+      "Shield": "",
+      "Dagger": "",
+      "Mace": "",
+      "Double Bat": "",
+      "Freeze Glove": "",
+      "SMP": "",
+      "Scythe": ""
     }
   },
 
-      {
-    name: "testy icle",
-    image: "",
-    ranks: {
-      "Shield": "C+",
-      "Dagger": "C",
-      "Mace": "S",
-      "Double Bat": "D",
-      "Freeze Glove": "C",
-      "SMP": "B+",
-      "Scythe": "A"
-    }
-  },
 ];
  
