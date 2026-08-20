@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TierGrid — PvP Rankings</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="brand" href="#"><span class="brand-mark">T</span><span>TierGrid</span></a>
+      <div class="nav-links">
+        <a class="active" href="#rankings">Rankings</a>
+        <a href="#about">Information</a>
+        <a href="https://discord.com/" target="_blank" rel="noreferrer">Discord</a>
+      </div>
+    </nav>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <div class="eyebrow">Community PvP rankings</div>
+      <h1>Find the best players in <span>every kit.</span></h1>
+      <p>Browse community-maintained rankings by game mode, region, and player tier. Replace the sample data with your own rankings.</p>
+      <div class="stats">
+        <div class="stat"><strong id="player-count">0</strong><span>Ranked players</span></div>
+        <div class="stat"><strong>10</strong><span>Categories</span></div>
+        <div class="stat"><strong>Global</strong><span>Regions covered</span></div>
+      </div>
+    </section>
+    <section id="rankings">
+      <div class="controls">
+        <div class="tabs" id="tabs"></div>
+        <input id="search" class="search" type="search" placeholder="Search player..." aria-label="Search player" />
+      </div>
+      <div class="rankings">
+        <div class="table-head"><div>Rank</div><div>Player</div><div>Region</div><div id="tiers-heading">Tiers</div></div>
+        <div id="ranking-list"></div>
+        <div id="empty" class="empty">No players match that search.</div>
+      </div>
+    </section>
+  </main>
+  <footer id="about">TierGrid is an example ranking-site template. It is not affiliated with any game or ranking community.</footer>
+  <script src="script.js"></script>
+</body>
+</html>
