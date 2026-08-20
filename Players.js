@@ -15,16 +15,44 @@
 */
 export const players = [
   {
-    name: "TEST PLAYER",
+    name: "Coopter",
     image: "",
     ranks: {
       "Shield": "S+",
-      "Dagger": "S",
-      "Mace": "A",
-      "Double Bat": "B",
-      "Freeze Glove": "A+",
+      "Dagger": "A+",
+      "Mace": "S",
+      "Double Bat": "B+",
+      "Freeze Glove": "A",
       "SMP": "S",
-      "Scythe": "B+"
+      "Scythe": "A+"
+    }
+  },
+
+  {
+    name: "PlayerTwo",
+    image: "",
+    ranks: {
+      "Shield": "A",
+      "Dagger": "S+",
+      "Mace": "B",
+      "Double Bat": "S",
+      "Freeze Glove": "A+",
+      "SMP": "B+",
+      "Scythe": "A"
+    }
+  },
+
+  {
+    name: "PlayerThree",
+    image: "",
+    ranks: {
+      "Shield": "B+",
+      "Dagger": "A",
+      "Mace": "S",
+      "Double Bat": "A+",
+      "Freeze Glove": "S+",
+      "SMP": "A",
+      "Scythe": "B"
     }
   }
 ];
