@@ -12,19 +12,5 @@ export const players = [
       "Scythe": "D"
     }
   },
-  
-{
-    name: "waitstopscrolling",
-    image: "",
-    ranks: {
-      "Shield": "B",
-      "Dagger": "B+",
-      "Mace": "",
-      "Double Bat": "",
-      "Freeze Glove": "",
-      "SMP": "",
-      "Scythe": ""
-    }
-  },
 ];
  
