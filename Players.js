@@ -134,3 +134,24 @@ export const players = [
     ]
   }
 ];
+export const players = [
+  {
+    id: 1,
+    name: "GubbyYeeps",
+    avatar: "https://yeeplist.page.gd/images/PvP_Rank.jpeg",
+    title: "Jew Yeep",
+    score: 245,
+    rank: "https://yeeplist.page.gd/images/War.png",
+    team: "",
+    categories: [
+      { cat: "Bat PvP",             pos: "Tier 1", img: "https://yeeplist.page.gd/images/Bat_Tier4.png" },
+      { cat: "Dagger PvP",          pos: "Tier 2", img: "https://yeeplist.page.gd/images/Bat_Tier4.png" },
+      { cat: "Freeze Glove PvP",    pos: "",       img: "https://yeeplist.page.gd/images/TierU.png" },
+      { cat: "Mace PvP",            pos: "",       img: "https://yeeplist.page.gd/images/TierU.png" },
+      { cat: "Shield + Weapon PvP", pos: "Tier 3", img: "https://yeeplist.page.gd/images/Tier3.png" },
+      { cat: "Fire Axe PvP",        pos: "",       img: "https://yeeplist.page.gd/images/TierU.png" },
+      { cat: "Scythe PvP",          pos: "",       img: "https://yeeplist.page.gd/images/TierU.png" },
+      { cat: "Baseball PvP",        pos: "",       img: "https://yeeplist.page.gd/images/TierU.png" },
+      { cat: "Other PvP",           pos: "Retired Tier: 4", img: "https://yeeplist.page.gd/images/Tier4.png" }
+    ]
+  },
