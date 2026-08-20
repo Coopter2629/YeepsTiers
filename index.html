@@ -213,12 +213,6 @@ a{color:inherit;}
   margin:0 auto;
   padding:56px 24px 0;
 }
-.section-head{
-  display:flex;align-items:baseline;justify-content:space-between;
-  margin-bottom:20px;
-}
-.section-head h2{font-size:22px;font-weight:700;}
-.section-head p{color:var(--muted);font-size:13px;margin:0;}
 
 .nav-grid{
   display:grid;
@@ -293,114 +287,235 @@ footer{
   font-size:12px;
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
 }
+
+/* ---------- mobile ---------- */
+@media(max-width:640px){
+  .topbar{padding:16px 16px 0;}
+  .brand img{width:34px;height:34px;}
+  .brand-name{font-size:16px;}
+  .brand-sub{font-size:9px;}
+
+  .hero{padding:32px 16px 16px;}
+  .hero-ctas{width:100%;}
+  .hero-ctas a{flex:1;text-align:center;}
+
+  .section{padding:40px 16px 0;}
+  .cta-band{margin:44px 16px 0;padding:26px 20px;justify-content:center;text-align:center;}
+  .cta-band > div{width:100%;}
+
+  footer{padding:28px 16px 24px;justify-content:center;text-align:center;}
+}
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <div class="brand">
-    <img src="https://yeeplist.page.gd/images/PvP_Rank.jpeg" alt="" />
+    <img id="brandLogo" src="" alt="" />
     <div>
-      <div class="brand-name">Yeeps Tiers</div>
-      <div class="brand-sub">The Yeeps List</div>
+      <div class="brand-name" id="brandName"></div>
+      <div class="brand-sub" id="brandSub"></div>
     </div>
   </div>
-  <div class="top-links">
-    <a href="Ranks.html">Rankings</a>
-    <a href="Teams.html">Teams</a>
-    <a href="Card.html">Player Cards</a>
-    <a href="ltm.html">LTMs</a>
-    <a class="discord-pill" href="https://discord.gg/7mry9QQCGH" target="_blank" rel="noopener">
-      <img src="https://yeeplist.page.gd/images/Discord.jpeg" alt="" />
-      Join Discord
-    </a>
-  </div>
+  <div class="top-links" id="topLinks"></div>
 </div>
 
 <section class="hero">
   <div>
-    <div class="eyebrow">Yeeps PvP · Community Rankings</div>
-    <h1>Every blade earns<br />its <span class="accent-word">tier</span>.</h1>
-    <p class="lede">
-      Track the best Yeeps PvP players across bats, daggers, shields, fire axes and more —
-      ranked, tiered, and updated by the community.
-    </p>
-    <div class="hero-ctas">
-      <a class="btn-primary" href="Ranks.html">View Rankings</a>
-      <a class="btn-ghost" href="Teams.html">Team Rankings</a>
-    </div>
+    <div class="eyebrow" id="heroEyebrow"></div>
+    <h1 id="heroHeadline"></h1>
+    <p class="lede" id="heroLede"></p>
+    <div class="hero-ctas" id="heroCtas"></div>
   </div>
 
   <div class="ring-wrap">
     <div class="ring-glow"></div>
-    <div class="ring">
-      <div class="ring-item ri-1"><span><img src="https://yeeplist.page.gd/images/Bat_Tier4.png" alt="Bat" /></span></div>
-      <div class="ring-item ri-2"><span><img src="https://yeeplist.page.gd/images/Freeze_Glove.png" alt="Freeze Glove" /></span></div>
-      <div class="ring-item ri-3"><span><img src="https://yeeplist.page.gd/images/SwarmSlayer.jpg" alt="Mace" /></span></div>
-      <div class="ring-item ri-4"><span><img src="https://yeeplist.page.gd/images/Tier3.png" alt="Shield" /></span></div>
-      <div class="ring-item ri-5"><span><img src="https://yeeplist.page.gd/images/Desert.png" alt="Fire Axe" /></span></div>
-      <div class="ring-item ri-6"><span><img src="https://yeeplist.page.gd/images/Horror.jpg" alt="Scythe" /></span></div>
-    </div>
+    <div class="ring" id="ring"></div>
     <div class="ring-core">
-      <img src="https://yeeplist.page.gd/images/PvP_Rank.jpeg" alt="" />
+      <img id="ringCoreImg" src="" alt="" />
     </div>
   </div>
 </section>
 
 <section class="section">
-  <div class="nav-grid">
-    <a class="nav-card" href="Ranks.html">
-      <div class="icon-badge">🏆</div>
-      <h3>PvP Rankings</h3>
-      <p>See individual players ranked across every PvP category, from Bat to Scythe.</p>
-      <div class="go">Browse rankings →</div>
-    </a>
-    <a class="nav-card" href="Teams.html">
-      <div class="icon-badge">🛡️</div>
-      <h3>Team Rankings</h3>
-      <p>Check out the best teams competing in Yeeps PvP right now.</p>
-      <div class="go">See teams →</div>
-    </a>
-    <a class="nav-card" href="Card.html">
-      <div class="icon-badge">🪪</div>
-      <h3>Player Cards</h3>
-      <p>View detailed player cards, tier history, and per-category standing.</p>
-      <div class="go">Look up a player →</div>
-    </a>
-    <a class="nav-card" href="ltm.html">
-      <div class="icon-badge">⏱️</div>
-      <h3>LTMs</h3>
-      <p>Explore current and previous limited time modes and their leaderboards.</p>
-      <div class="go">See LTMs →</div>
-    </a>
-  </div>
-
-  <div class="weapon-strip">
-    <div class="weapon-chip"><img src="https://yeeplist.page.gd/images/Bat_Tier4.png" alt="" />Bat</div>
-    <div class="weapon-chip"><img src="https://yeeplist.page.gd/images/PvP_Rank.jpeg" alt="" />Dagger</div>
-    <div class="weapon-chip"><img src="https://yeeplist.page.gd/images/Freeze_Glove.png" alt="" />Freeze Glove</div>
-    <div class="weapon-chip"><img src="https://yeeplist.page.gd/images/SwarmSlayer.jpg" alt="" />Mace</div>
-    <div class="weapon-chip"><img src="https://yeeplist.page.gd/images/Tier3.png" alt="" />Shield</div>
-    <div class="weapon-chip"><img src="https://yeeplist.page.gd/images/Desert.png" alt="" />Fire Axe</div>
-    <div class="weapon-chip"><img src="https://yeeplist.page.gd/images/Horror.jpg" alt="" />Scythe</div>
-  </div>
+  <div class="nav-grid" id="navGrid"></div>
+  <div class="weapon-strip" id="weaponStrip"></div>
 </section>
 
 <div class="cta-band">
   <div>
-    <h2>Join the community</h2>
-    <p>Keep up with rank updates, tier resets, and everything Yeeps PvP.</p>
+    <h2 id="ctaHeadline"></h2>
+    <p id="ctaBody"></p>
   </div>
-  <a class="discord-pill" href="https://discord.gg/7mry9QQCGH" target="_blank" rel="noopener">
-    <img src="https://yeeplist.page.gd/images/Discord.jpeg" alt="" />
-    Join Our Discord
-  </a>
+  <a class="discord-pill" id="ctaDiscordBtn" href="" target="_blank" rel="noopener"></a>
 </div>
 
 <footer>
-  <span>The Yeeps List — not affiliated with Trass Games</span>
-  <span>V2.0 Pre-release 1</span>
+  <span id="footerLeft"></span>
+  <span id="footerRight"></span>
 </footer>
+
+<script>
+/* =====================================================================
+   EDIT EVERYTHING HERE. This is the only section you should need to
+   touch to change text, links, images, nav cards, or weapons.
+   The HTML/CSS above just renders whatever is in this object.
+   ===================================================================== */
+const siteConfig = {
+
+  brand: {
+    logo: "https://yeeplist.page.gd/images/PvP_Rank.jpeg",
+    name: "Yeeps Tiers",
+    sub: "The Yeeps List"
+  },
+
+  // Links shown in the top-right nav bar (not counting Discord).
+  topLinks: [
+    { label: "Rankings",    href: "Ranks.html" },
+    { label: "Teams",       href: "Teams.html" },
+    { label: "Player Cards", href: "Card.html" },
+    { label: "LTMs",        href: "ltm.html" }
+  ],
+
+  discord: {
+    label: "Join Discord",
+    url: "https://discord.gg/7mry9QQCGH",
+    icon: "https://yeeplist.page.gd/images/Discord.jpeg"
+  },
+
+  hero: {
+    eyebrow: "Yeeps PvP · Community Rankings",
+    // Use <span class="accent-word">...</span> around the word you want
+    // highlighted in red.
+    headlineHtml: 'Every blade earns<br />its <span class="accent-word">tier</span>.',
+    lede: "Track the best Yeeps PvP players across bats, daggers, shields, fire axes and more — ranked, tiered, and updated by the community.",
+    primaryCta: { label: "View Rankings", href: "Ranks.html" },
+    secondaryCta: { label: "Team Rankings", href: "Teams.html" },
+    ringCenterImage: "https://yeeplist.page.gd/images/PvP_Rank.jpeg"
+  },
+
+  // The icons that spin around the ring in the hero. Add, remove, or
+  // reorder freely — they'll space themselves evenly.
+  ringWeapons: [
+    { name: "Bat",          img: "https://yeeplist.page.gd/images/Bat_Tier4.png" },
+    { name: "Freeze Glove", img: "https://yeeplist.page.gd/images/Freeze_Glove.png" },
+    { name: "Mace",         img: "https://yeeplist.page.gd/images/SwarmSlayer.jpg" },
+    { name: "Shield",       img: "https://yeeplist.page.gd/images/Tier3.png" },
+    { name: "Fire Axe",     img: "https://yeeplist.page.gd/images/Desert.png" },
+    { name: "Scythe",       img: "https://yeeplist.page.gd/images/Horror.jpg" }
+  ],
+
+  // The four big cards below the hero. Add or remove entries and the
+  // grid will reflow automatically.
+  navCards: [
+    { icon: "🏆", title: "PvP Rankings",  desc: "See individual players ranked across every PvP category, from Bat to Scythe.", cta: "Browse rankings →", href: "Ranks.html" },
+    { icon: "🛡️", title: "Team Rankings", desc: "Check out the best teams competing in Yeeps PvP right now.", cta: "See teams →", href: "Teams.html" },
+    { icon: "🪪", title: "Player Cards",  desc: "View detailed player cards, tier history, and per-category standing.", cta: "Look up a player →", href: "Card.html" },
+    { icon: "⏱️", title: "LTMs",          desc: "Explore current and previous limited time modes and their leaderboards.", cta: "See LTMs →", href: "ltm.html" }
+  ],
+
+  // Small pill chips listing every weapon category. Independent of
+  // ringWeapons above, so you can list more than fit on the ring.
+  weaponStrip: [
+    { name: "Bat",          img: "https://yeeplist.page.gd/images/Bat_Tier4.png" },
+    { name: "Dagger",       img: "https://yeeplist.page.gd/images/PvP_Rank.jpeg" },
+    { name: "Freeze Glove", img: "https://yeeplist.page.gd/images/Freeze_Glove.png" },
+    { name: "Mace",         img: "https://yeeplist.page.gd/images/SwarmSlayer.jpg" },
+    { name: "Shield",       img: "https://yeeplist.page.gd/images/Tier3.png" },
+    { name: "Fire Axe",     img: "https://yeeplist.page.gd/images/Desert.png" },
+    { name: "Scythe",       img: "https://yeeplist.page.gd/images/Horror.jpg" }
+  ],
+
+  ctaBand: {
+    headline: "Join the community",
+    body: "Keep up with rank updates, tier resets, and everything Yeeps PvP.",
+    buttonLabel: "Join Our Discord"
+  },
+
+  footer: {
+    left: "The Yeeps List — not affiliated with Trass Games",
+    right: "V2.0 Pre-release 1"
+  }
+};
+/* ===================== end of editable section ===================== */
+
+
+/* ---- rendering (you shouldn't need to edit below this line) ---- */
+function el(tag, attrs = {}, html) {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
+  if (html !== undefined) node.innerHTML = html;
+  return node;
+}
+
+// Top bar
+document.getElementById("brandLogo").src = siteConfig.brand.logo;
+document.getElementById("brandName").textContent = siteConfig.brand.name;
+document.getElementById("brandSub").textContent = siteConfig.brand.sub;
+
+const topLinks = document.getElementById("topLinks");
+siteConfig.topLinks.forEach(link => {
+  const a = el("a", { href: link.href }, link.label);
+  topLinks.appendChild(a);
+});
+const discordTop = el("a", {
+  class: "discord-pill",
+  href: siteConfig.discord.url,
+  target: "_blank",
+  rel: "noopener"
+}, `<img src="${siteConfig.discord.icon}" alt="" /> ${siteConfig.discord.label}`);
+topLinks.appendChild(discordTop);
+
+// Hero
+document.getElementById("heroEyebrow").textContent = siteConfig.hero.eyebrow;
+document.getElementById("heroHeadline").innerHTML = siteConfig.hero.headlineHtml;
+document.getElementById("heroLede").textContent = siteConfig.hero.lede;
+document.getElementById("ringCoreImg").src = siteConfig.hero.ringCenterImage;
+
+const heroCtas = document.getElementById("heroCtas");
+heroCtas.appendChild(el("a", { class: "btn-primary", href: siteConfig.hero.primaryCta.href }, siteConfig.hero.primaryCta.label));
+heroCtas.appendChild(el("a", { class: "btn-ghost", href: siteConfig.hero.secondaryCta.href }, siteConfig.hero.secondaryCta.label));
+
+// Ring
+const ring = document.getElementById("ring");
+const n = siteConfig.ringWeapons.length;
+siteConfig.ringWeapons.forEach((w, i) => {
+  const angle = (360 / n) * i;
+  const item = el("div", { class: "ring-item" });
+  item.style.transform = `rotate(${angle}deg) translate(150px) rotate(-${angle}deg)`;
+  const spin = el("span", {}, `<img src="${w.img}" alt="${w.name}" title="${w.name}" />`);
+  item.appendChild(spin);
+  ring.appendChild(item);
+});
+
+// Nav cards
+const navGrid = document.getElementById("navGrid");
+siteConfig.navCards.forEach(card => {
+  const a = el("a", { class: "nav-card", href: card.href }, `
+    <div class="icon-badge">${card.icon}</div>
+    <h3>${card.title}</h3>
+    <p>${card.desc}</p>
+    <div class="go">${card.cta}</div>
+  `);
+  navGrid.appendChild(a);
+});
+
+// Weapon strip
+const weaponStrip = document.getElementById("weaponStrip");
+siteConfig.weaponStrip.forEach(w => {
+  weaponStrip.appendChild(el("div", { class: "weapon-chip" }, `<img src="${w.img}" alt="" />${w.name}`));
+});
+
+// CTA band
+document.getElementById("ctaHeadline").textContent = siteConfig.ctaBand.headline;
+document.getElementById("ctaBody").textContent = siteConfig.ctaBand.body;
+document.getElementById("ctaDiscordBtn").href = siteConfig.discord.url;
+document.getElementById("ctaDiscordBtn").innerHTML = `<img src="${siteConfig.discord.icon}" alt="" /> ${siteConfig.ctaBand.buttonLabel}`;
+
+// Footer
+document.getElementById("footerLeft").textContent = siteConfig.footer.left;
+document.getElementById("footerRight").textContent = siteConfig.footer.right;
+</script>
 
 </body>
 </html>
