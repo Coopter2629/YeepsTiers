@@ -13,45 +13,18 @@
   To use an image, upload it to images/players/ and write, for example:
   image: "images/players/coopter.png"
 */
-
 export const players = [
   {
-    name: "Woopergubbyyeeps",
+    name: "TEST PLAYER",
     image: "",
     ranks: {
-      "Shield": "F-",
-      "Dagger": "F-",
-      "Mace": "F-",
-      "Double Bat": "F-",
-      "Freeze Glove": "F-",
-      "SMP": "F-",
-      "Scythe": "F-"
-    }
-  },
-  {
-    name: "AnotherPlayer",
-    image: "",
-    ranks: {
-      "Shield": "A",
-      "Dagger": "S+",
-      "Mace": "S",
-      "Double Bat": "B+",
+      "Shield": "S+",
+      "Dagger": "S",
+      "Mace": "A",
+      "Double Bat": "B",
       "Freeze Glove": "A+",
       "SMP": "S",
-      "Scythe": "B"
-    }
-  },
-  {
-    name: "NewPlayer",
-    image: "",
-    ranks: {
-      "Shield": "B",
-      "Dagger": "A",
-      "Mace": "B+",
-      "Double Bat": "S",
-      "Freeze Glove": "A",
-      "SMP": "A+",
-      "Scythe": "S+"
+      "Scythe": "B+"
     }
   }
 ];
