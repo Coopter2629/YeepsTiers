@@ -41,7 +41,21 @@ export const players = [
       "Scythe": "A"
     }
   },
-
+  
+{
+    name: "Jewish yeep",
+    image: "",
+    ranks: {
+      "Shield": "F-",
+      "Dagger": "A+",
+      "Mace": "S",
+      "Double Bat": "B+",
+      "Freeze Glove": "A",
+      "SMP": "S",
+      "Scythe": "A+"
+    }
+  },
+  
   {
     name: "PlayerThree",
     image: "",
