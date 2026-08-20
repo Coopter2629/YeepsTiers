@@ -15,21 +15,21 @@
 */
 export const players = [
   {
-    name: "Coopter",
+    name: "",
     image: "",
     ranks: {
-      "Shield": "S+",
-      "Dagger": "A+",
-      "Mace": "S",
-      "Double Bat": "B+",
-      "Freeze Glove": "A",
-      "SMP": "S",
-      "Scythe": "A+"
+      "Shield": "",
+      "Dagger": "",
+      "Mace": "",
+      "Double Bat": "",
+      "Freeze Glove": "",
+      "SMP": "",
+      "Scythe": ""
     }
   },
   
 {
-    name: "Madeo yeeps",
+    name: "",
     image: "",
     ranks: {
       "Shield": "A+",
