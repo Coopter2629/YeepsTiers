@@ -31,7 +31,7 @@ function calculateScore(player){
   const ranked = categories.filter(c => c !== "Overall" && player.ranks[c]);
   return ranked.reduce((sum, c) => sum + (tierPoints[player.ranks[c]] || 0), 0);
 }
-function rankName(score){if(score>=950)return"Grandmaster";if(score>=850)return"Master";if(score>=750)return"Elite";if(score>=650)return"Diamond";if(score>=550)return"Platinum";if(score>=450)return"Gold";if(score>=300)return"Silver";return"Bronze"}
+function rankName(score){if(score>=650)return"Grandmaster";if(score>=600)return"Master";if(score>=550)return"Elite";if(score>=500)return"Diamond";if(score>=450)return"Platinum";if(score>=400)return"Gold";if(score>=350)return"Silver";return"Bronze"}
 function visiblePlayers(){return players.filter(p=>p.name.toLowerCase().includes(searchQuery.toLowerCase()))}
 function playerByName(name){return players.find(p=>p.name===name)}
 function bindOpen(){document.querySelectorAll("[data-player]").forEach(node=>node.onclick=()=>openModal(playerByName(node.dataset.player)))}
