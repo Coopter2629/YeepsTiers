@@ -16,16 +16,16 @@
 
 export const players = [
   {
-    name: "ExamplePlayer",
+    name: "Woopergubbyyeeps",
     image: "",
-    ranks: {
-      "Shield": "S+",
-      "Dagger": "S",
-      "Mace": "A+",
-      "Double Bat": "A",
-      "Freeze Glove": "S",
-      "SMP": "B+",
-      "Scythe": "A"
+    ranks: {Jew
+      "Shield": "F-",
+      "Dagger": "F-",
+      "Mace": "F-",
+      "Double Bat": "F-",
+      "Freeze Glove": "F-",
+      "SMP": "F-",
+      "Scythe": "F-"
     }
   },
   {
