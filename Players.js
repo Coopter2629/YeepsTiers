@@ -27,5 +27,18 @@ export const players = [
     }
   },
 
+      {
+    name: "testy icle",
+    image: "",
+    ranks: {
+      "Shield": "C+",
+      "Dagger": "C",
+      "Mace": "S",
+      "Double Bat": "D",
+      "Freeze Glove": "C",
+      "SMP": "B+",
+      "Scythe": "A"
+    }
+  },
 ];
  
