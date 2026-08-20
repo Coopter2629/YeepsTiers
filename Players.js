@@ -24,6 +24,20 @@ export const players = [
       "Double Bat": "B",
       "Freeze Glove": "C",
       "SMP": "",
+      "Scythe": "B+"
+    }
+  },
+    
+  {
+    name: "BlueFire120.",
+    image: "",
+    ranks: {
+      "Shield": "C",
+      "Dagger": "",
+      "Mace": "",
+      "Double Bat": "",
+      "Freeze Glove": "",
+      "SMP": "C",
       "Scythe": ""
     }
   },
