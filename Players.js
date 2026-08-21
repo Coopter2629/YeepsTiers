@@ -13,6 +13,20 @@ export const players = [
       "Scythe": ""
     }
   },
+      
+  {
+    name: "KingJaxon",
+    image: "",
+    ranks: {
+      "Shield": "B+",
+      "Dagger": "",
+      "Mace": "A",
+      "Double Bat": "D",
+      "Freeze Glove": "A",
+      "SMP": "",
+      "Scythe": ""
+    }
+  },
   
   {
     name: "HEAVY_96",
