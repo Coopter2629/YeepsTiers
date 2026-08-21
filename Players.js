@@ -58,7 +58,7 @@ export const players = [
   
   {
     name: "DolfPin",
-    image: "",
+    image: "pfps/DolfPin",
     ranks: {
       "Shield": "",
       "Dagger": "",
