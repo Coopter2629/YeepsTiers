@@ -16,7 +16,7 @@ export const players = [
       
   {
     name: "KingJaxon",
-    image: "",
+    image: "pfps/KingJaxon.png",
     ranks: {
       "Shield": "B+",
       "Dagger": "",
