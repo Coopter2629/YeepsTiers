@@ -60,7 +60,7 @@ export const players = [
     name: "Slipway",
     image: "",
     ranks: {
-      "Shield": "L",
+      "Shield": "Kai Yeeps",
       "Dagger": "L",
       "Mace": "L",
       "Double Bat": "L",
