@@ -90,7 +90,7 @@ export const players = [
     ranks: {
       "Shield": "B+",
       "Dagger": "",
-      "Mace": "B",
+      "Mace": "",
       "Double Bat": "A+",
       "Freeze Glove": "",
       "SMP": "",
