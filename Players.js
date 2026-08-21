@@ -83,5 +83,19 @@ export const players = [
       "Scythe": "B"
     }
   },
+  
+    {
+    name: "CookingWithTempo!",
+    image: "",
+    ranks: {
+      "Shield": "B+",
+      "Dagger": "",
+      "Mace": "B",
+      "Double Bat": "A+",
+      "Freeze Glove": "",
+      "SMP": "",
+      "Scythe": ""
+    }
+  },
 ];
  
