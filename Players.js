@@ -61,12 +61,12 @@ export const players = [
     image: "",
     ranks: {
       "Shield": "Kai Yeeps",
-      "Dagger": "L",
-      "Mace": "L",
-      "Double Bat": "L",
-      "Freeze Glove": "L",
-      "SMP": "L",
-      "Scythe": "L"
+      "Dagger": "Kai Yeeps",
+      "Mace": "Kai Yeeps",
+      "Double Bat": "Kai Yeeps",
+      "Freeze Glove": "Kai Yeeps",
+      "SMP": "Kai Yeeps",
+      "Scythe": "Kai Yeeps"
     }
   },
       
