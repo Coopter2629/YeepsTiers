@@ -55,7 +55,21 @@ export const players = [
       "Scythe": ""
     }
   },
-  
+    
+    {
+    name: "Slipway",
+    image: "",
+    ranks: {
+      "Shield": "L",
+      "Dagger": "",
+      "Mace": "",
+      "Double Bat": "",
+      "Freeze Glove": "",
+      "SMP": "",
+      "Scythe": ""
+    }
+  },
+      
   {
     name: "DolfPin",
     image: "pfps/DolfPin",
