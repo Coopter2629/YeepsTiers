@@ -97,5 +97,19 @@ export const players = [
       "Scythe": ""
     }
   },
+  
+     {
+    name: "SpaceLord",
+    image: "",
+    ranks: {
+      "Shield": "B+",
+      "Dagger": "B",
+      "Mace": "C",
+      "Double Bat": "B+",
+      "Freeze Glove": "C",
+      "SMP": "A+",
+      "Scythe": "A+"
+    }
+  },
 ];
  
