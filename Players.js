@@ -83,21 +83,7 @@ export const players = [
       "Scythe": ""
     }
   },
-    
-    {
-    name: "Slipway",
-    image: "",
-    ranks: {
-      "Shield": "Kai Yeeps",
-      "Dagger": "Kai Yeeps",
-      "Mace": "Kai Yeeps",
-      "Double Bat": "Kai Yeeps",
-      "Freeze Glove": "Kai Yeeps",
-      "SMP": "Kai Yeeps",
-      "Scythe": "Kai Yeeps"
-    }
-  },
-      
+ 
   {
     name: "DolfPin",
     image: "pfps/DolfPin",
