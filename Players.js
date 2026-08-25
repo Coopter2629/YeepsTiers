@@ -1,3 +1,20 @@
+/*
+  
+    {
+    name: "",
+    image: "pfps/",
+    ranks: {
+      "Shield": "Untested",
+      "Dagger": "Untested",
+      "Mace": "Untested",
+      "Double Bat": "Untested",
+      "Freeze Glove": "Untested",
+      "SMP": "Untested",
+      "Scythe": "Untested"
+    }
+  },
+   // discord id:
+   */
 export const players = [
   
     {
@@ -13,7 +30,21 @@ export const players = [
       "Scythe": ""
     }
   },
-   
+    
+    {
+    name: "Fourcred",
+    image: "pfps/Fourcred.png",
+    ranks: {
+      "Shield": "B",
+      "Dagger": "B",
+      "Mace": "B",
+      "Double Bat": "A",
+      "Freeze Glove": "C",
+      "SMP": "A+",
+      "Scythe": "Untested"
+    }
+  },
+   // discord id: 1353182095731724328
 {
     name: "YellowMellow13",
     image: "pfps/YellowMellow13.png",
