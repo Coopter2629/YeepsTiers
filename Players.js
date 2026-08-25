@@ -13,7 +13,21 @@ export const players = [
       "Scythe": ""
     }
   },
-      
+   
+{
+    name: "YellowMellow13",
+    image: "",
+    ranks: {
+      "Shield": "S",
+      "Dagger": "B+",
+      "Mace": "",
+      "Double Bat": "B",
+      "Freeze Glove": "S+",
+      "SMP": "",
+      "Scythe": "A"
+    }
+  },
+     
   {
     name: "KingJaxon",
     image: "pfps/KingJaxon.png",
@@ -130,13 +144,13 @@ export const players = [
     name: "YARSYARSYARS",
     image: "",
     ranks: {
-      "Shield": "C",
-      "Dagger": "",
+      "Shield": "B+",
+      "Dagger": "A",
       "Mace": "A+",
       "Double Bat": "C+",
-      "Freeze Glove": "",
+      "Freeze Glove": "C",
       "SMP": "A",
-      "Scythe": ""
+      "Scythe": "S"
     }
   },
 
