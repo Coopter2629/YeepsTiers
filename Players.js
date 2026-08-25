@@ -114,7 +114,7 @@ export const players = [
   
      {
     name: "SpaceLord",
-    image: "",
+    image: "pfps/Spacelord",
     ranks: {
       "Shield": "B+",
       "Dagger": "B",
