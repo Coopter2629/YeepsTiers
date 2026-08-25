@@ -142,7 +142,7 @@ export const players = [
 
      {
     name: "YARSYARSYARS",
-    image: "",
+    image: "pfps/Yars_pfp.png",
     ranks: {
       "Shield": "B+",
       "Dagger": "A",
