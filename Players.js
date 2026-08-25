@@ -58,7 +58,7 @@ export const players = [
   
   {
     name: "HEAVY_96",
-    image: "pfps/Screenshot_20260820_141125_Discord.jpg",
+    image: "pfps/Heavy96.jpg",
     ranks: {
       "Shield": "",
       "Dagger": "C",
