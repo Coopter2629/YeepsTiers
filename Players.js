@@ -147,7 +147,7 @@ export const players = [
       "Shield": "B+",
       "Dagger": "A",
       "Mace": "A+",
-      "Double Bat": "C+",
+      "Double Bat": "B+",
       "Freeze Glove": "C",
       "SMP": "A",
       "Scythe": "S"
