@@ -16,7 +16,7 @@ export const players = [
    
 {
     name: "YellowMellow13",
-    image: "",
+    image: "pfps/YellowMellow13.png",
     ranks: {
       "Shield": "S",
       "Dagger": "B+",
@@ -27,7 +27,21 @@ export const players = [
       "Scythe": "A"
     }
   },
-     
+      
+{
+    name: "Crazy_I_Was_Crazy",
+    image: "",
+    ranks: {
+      "Shield": "B",
+      "Dagger": "A",
+      "Mace": "",
+      "Double Bat": "",
+      "Freeze Glove": "",
+      "SMP": "",
+      "Scythe": ""
+    }
+  },
+      
   {
     name: "KingJaxon",
     image: "pfps/KingJaxon.png",
