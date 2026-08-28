@@ -22,8 +22,8 @@
 import { players } from "./Players.js";
 
 const categories=["Overall","Shield","Dagger","Mace","Double Bat","Freeze Glove","SMP","Scythe"];
-const tierPoints={"S+":100,S:92,"A+":84,A:76,"B+":68,B:58,C:45,D:30,L:-100,"Kai Yeeps":-9999999999999999};
-const tierOrder={"S+":8,S:7,"A+":6,A:5,"B+":4,B:3,C:2,D:1};
+const tierPoints={"S+":100,S:92,"A+":84,A:76,"B+":68,B:58,C:45,D:30,L:-100,"Kai Yeeps":-9999999999999999,"HT1":100,"LT1":92,"HT2":84,"LT2":76,"HT3":68,"LT3":58,"HT4":45,"LT4":30,"HT5":25,Lt5:20};
+const tierOrder={"S+":8,S:7,"A+":6,A:5,"B+":4,B:3,C:2,D:1,"Ht1":10,"Lt1":9,"HT2":8,"LT2":7,"HT3":6,"LT3":5,"HT4":4,"LT4":3,"HT5":2,"LT5":1};
 let activeCategory="Overall",searchQuery="";
 const tabs=document.getElementById("tabs"),content=document.getElementById("content"),search=document.getElementById("search");
 const initials=name=>name.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
