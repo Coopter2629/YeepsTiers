@@ -32,6 +32,20 @@ export const players = [
   },
       
     {
+    name: "WooperYeeps",
+    image: "pfps/WooperYeeps.png",
+    ranks: {
+      "Shield": "HT1",
+      "Dagger": "LT2",
+      "Mace": "HT1",
+      "Double Bat": "Ht2",
+      "Freeze Glove": "LT3",
+      "SMP": "HT1",
+      "Scythe": "HT2"
+    }
+  },
+   // discord id:1141406264606326847
+    {
     name: "Morleo",
     image: "pfps/Morleo",
     ranks: {
