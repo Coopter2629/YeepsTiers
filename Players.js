@@ -30,7 +30,21 @@ export const players = [
       "Scythe": ""
     }
   },
-    
+      
+    {
+    name: "Morleo",
+    image: "pfps/Morleo",
+    ranks: {
+      "Shield": "LT1",
+      "Dagger": "LT1",
+      "Mace": "LT2",
+      "Double Bat": "HT1",
+      "Freeze Glove": "LT1",
+      "SMP": "HT1",
+      "Scythe": "LT1"
+    }
+  },
+   // discord id:1438293982869454868
     {
     name: "Fourcred",
     image: "pfps/Fourcred.png",
