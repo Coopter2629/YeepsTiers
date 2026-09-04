@@ -36,7 +36,7 @@ export const players = [
     image: "pfps/WooperYeeps.png",
     ranks: {
       "Shield": "HT1",
-      "Dagger": "LT2",
+      "Dagger": "LT1",
       "Mace": "HT1",
       "Double Bat": "Ht2",
       "Freeze Glove": "LT3",
@@ -54,7 +54,7 @@ export const players = [
       "Mace": "LT2",
       "Double Bat": "HT1",
       "Freeze Glove": "LT1",
-      "SMP": "HT1",
+      "SMP": "LT1",
       "Scythe": "LT1"
     }
   },
