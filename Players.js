@@ -58,20 +58,6 @@ export const players = [
   },
    // discord id:1080242764651954186
   {
-    name: "Spacelord",
-    image: "",
-    ranks: {
-      "Shield": "Untested",
-      "Dagger": "Untested",
-      "Mace": "Untested",
-      "Double Bat": "Untested",
-      "Freeze Glove": "Untested",
-      "SMP": "Untested",
-      "Scythe": "LT1"
-    }
-  },
-   // discord id:1254959931468283966
-  {
     name: "Clumsy",
     image: "pfps/clumsy.png",
     ranks: {
@@ -250,10 +236,10 @@ export const players = [
       "Double Bat": "HT3",
       "Freeze Glove": "HT4",
       "SMP": "HT2",
-      "Scythe": "HT2"
+      "Scythe": "LT1"
     }
   },
-
+   // discord id:1254959931468283966
     {
     name: "Notice",
     image: "",
