@@ -1,6 +1,5 @@
 /*
-  
-    {
+{
     name: "",
     image: "pfps/",
     ranks: {
@@ -16,6 +15,76 @@
    // discord id:
    */
 export const players = [
+  {
+    name: "ChiefChikoin",
+    image: "",
+    ranks: {
+      "Shield": "HT2",
+      "Dagger": "HT3",
+      "Mace": "LT3",
+      "Double Bat": "LT2",
+      "Freeze Glove": "HT3",
+      "SMP": "LT2",
+      "Scythe": "HT3"
+    }
+  },
+   // discord id:1439256813722665082
+  {
+    name: "LostBamaKids",
+    image: "",
+    ranks: {
+      "Shield": "LT1",
+      "Dagger": "LT3",
+      "Mace": "HT4",
+      "Double Bat": "LT2",
+      "Freeze Glove": "LT1",
+      "SMP": "LT1",
+      "Scythe": "LT2"
+    }
+  },
+   // discord id:1253793589771636786
+  {
+    name: "Castle",
+    image: "",
+    ranks: {
+      "Shield": "HT3",
+      "Dagger": "HT3",
+      "Mace": "Untested",
+      "Double Bat": "HT2",
+      "Freeze Glove": "Untested",
+      "SMP": "HT2",
+      "Scythe": "LT3"
+    }
+  },
+   // discord id:1080242764651954186
+  {
+    name: "Spacelord",
+    image: "",
+    ranks: {
+      "Shield": "Untested",
+      "Dagger": "Untested",
+      "Mace": "Untested",
+      "Double Bat": "Untested",
+      "Freeze Glove": "Untested",
+      "SMP": "Untested",
+      "Scythe": "LT1"
+    }
+  },
+   // discord id:1254959931468283966
+  {
+    name: "Clumsy",
+    image: "pfps/clumsy.png",
+    ranks: {
+      "Shield": "Untested",
+      "Dagger": "Untested",
+      "Mace": "Untested",
+      "Double Bat": "HT2",
+      "Freeze Glove": "Untested",
+      "SMP": "Untested",
+      "Scythe": "Untested"
+    }
+  },
+   // discord id: 1208185584020095078
   
     {
     name: "ItzDarkC0smic",
@@ -64,7 +133,7 @@ export const players = [
     image: "pfps/Fourcred.png",
     ranks: {
       "Shield": "LT3",
-      "Dagger": "LT3",
+      "Dagger": "HT2",
       "Mace": "LT3",
       "Double Bat": "LT2",
       "Freeze Glove": "HT4",
