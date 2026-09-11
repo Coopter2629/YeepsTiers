@@ -1,1 +1,265 @@
+import { players as defaultPlayers } from "./Players.js";
 
+const categories = ["Overall", "Shield", "Dagger", "Mace", "Double Bat", "Freeze Glove", "SMP", "Scythe"];
+const tierPoints = { "S+": 100, S: 92, "A+": 84, A: 76, "B+": 68, B: 58, C: 45, D: 30, L: -100, "Kai Yeeps": -9999999999999999, "HT1": 100, "LT1": 92, "HT2": 84, "LT2": 76, "HT3": 68, "LT3": 58, "HT4": 45, "LT4": 30, "HT5": 25, "Lt5": 20 };
+const tierOrder = { "S+": 18, S: 17, "A+": 16, A: 15, "B+": 14, B: 13, C: 12, D: 11, "HT1": 10, "LT1": 9, "HT2": 8, "LT2": 7, "HT3": 6, "LT3": 5, "HT4": 4, "LT4": 3, "HT5": 2, "LT5": 1, "Lt5": 1 };
+
+// --- GITHUB CONFIGURATION ---
+const GITHUB_USERNAME = "Coopter2629"; // Replace with your GitHub Username
+const GITHUB_REPO = "YeepsTiers";         // Replace with your repository name
+const FILE_PATH = "./Players.js";               // Path to Players.js inside your repository
+
+let players = JSON.parse(localStorage.getItem("custom_players")) || defaultPlayers;
+let activeCategory = "Overall", searchQuery = "";
+
+const tabs = document.getElementById("tabs");
+const content = document.getElementById("content");
+const search = document.getElementById("search");
+
+const initials = name => name.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase();
+const avatar = player => `<div class="avatar">${player.image ? `<img src="${player.image}" alt="${player.name}">` : initials(player.name)}</div>`;
+
+function calculateScore(player) {
+  const ranked = categories.filter(c => c !== "Overall" && player.ranks[c]);
+  return ranked.reduce((sum, c) => sum + (tierPoints[player.ranks[c]] || 0), 0);
+}
+
+function rankName(score) {
+  if (score >= 650) return "Grandmaster";
+  if (score >= 600) return "Master";
+  if (score >= 550) return "Elite";
+  if (score >= 500) return "Diamond";
+  if (score >= 450) return "Platinum";
+  if (score >= 400) return "Gold";
+  if (score >= 350) return "Silver";
+  return "Bronze";
+}
+
+function visiblePlayers() {
+  return players.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()));
+}
+
+function playerByName(name) {
+  return players.find(p => p.name === name);
+}
+
+function bindOpen() {
+  document.querySelectorAll("[data-player]").forEach(node => {
+    node.onclick = () => {
+      const player = playerByName(node.dataset.player);
+      if (isAdmin) {
+        openEditModal(player);
+      } else {
+        openModal(player);
+      }
+    };
+  });
+}
+
+function renderTabs() {
+  tabs.innerHTML = categories.map(c => `<button class="tab ${c === activeCategory ? "active" : ""}" data-cat="${c}">${c}</button>`).join("");
+  document.querySelectorAll("[data-cat]").forEach(b => b.onclick = () => {
+    activeCategory = b.dataset.cat;
+    renderTabs();
+    renderContent();
+  });
+}
+
+function renderOverall() {
+  const ranked = visiblePlayers().map(p => ({ ...p, score: calculateScore(p) })).sort((a, b) => b.score - a.score);
+  if (!ranked.length) {
+    content.innerHTML = '<div class="empty-state">No players found.</div>';
+    return;
+  }
+  content.innerHTML = ranked.map((p, i) => `
+    <article class="overall-row" data-player="${p.name}">
+      <div class="overall-rank ${i === 0 ? "gold" : i === 1 ? "silver" : i === 2 ? "bronze" : ""}">#${i + 1}</div>
+      ${avatar(p)}
+      <div class="player-info">
+        <div class="player-name">${p.name}</div>
+        <div class="player-rank">${rankName(p.score)}</div>
+      </div>
+      <div class="score">${p.score}/700</div>
+    </article>
+  `).join("");
+  bindOpen();
+}
+
+function renderCategory(category) {
+  const list = visiblePlayers().filter(p => p.ranks[category]).sort((a, b) => (tierOrder[b.ranks[category]] || 0) - (tierOrder[a.ranks[category]] || 0));
+  if (!list.length) {
+    content.innerHTML = `<div class="empty-state">No players ranked in ${category}.</div>`;
+    return;
+  }
+  const tierList = ["S+", "S", "A+", "A", "B+", "B", "C", "D", "L", "HT1", "LT1", "HT2", "LT2", "HT3", "LT3", "HT4", "LT4", "HT5", "LT5"];
+  content.innerHTML = tierList.map(t => {
+    const group = list.filter(p => p.ranks[category] === t);
+    if (!group.length) return "";
+    return `
+      <section class="tier-block">
+        <div class="tier-head"><span class="tier-badge">${t} Tier</span><span class="tier-count">${group.length} player${group.length === 1 ? "" : "s"}</span></div>
+        <div class="player-grid">
+          ${group.map(p => `<article class="player-chip" data-player="${p.name}">${avatar(p)}<div><div class="player-name">${p.name}</div><div class="player-rank">${calculateScore(p)}/700 overall</div></div></article>`).join("")}
+        </div>
+      </section>
+    `;
+  }).join("");
+  bindOpen();
+}
+
+function renderContent() {
+  activeCategory === "Overall" ? renderOverall() : renderCategory(activeCategory);
+}
+
+function openModal(player) {
+  const score = calculateScore(player);
+  document.getElementById("modal-title").textContent = player.name;
+  document.getElementById("modal-text").textContent = `${rankName(score)} • ${score}/700 Overall Points`;
+  document.getElementById("modal-categories").innerHTML = Object.entries(player.ranks).map(([c, t]) => `<span class="category-chip">${c}: ${t || 'Untested'}</span>`).join("");
+  document.getElementById("modal").classList.add("active");
+}
+
+/* --- GITHUB API AUTO-UPDATE --- */
+async function pushToGitHub(newPlayersArray) {
+  let token = localStorage.getItem("gh_pat_token");
+  if (!token) {
+    token = prompt("Enter your GitHub Personal Access Token to commit changes live:");
+    if (!token) return alert("Operation canceled: No GitHub token provided.");
+    localStorage.setItem("gh_pat_token", token);
+  }
+
+  const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/contents/${FILE_PATH}`;
+  const fileContent = `export const players = ${JSON.stringify(newPlayersArray, null, 2)};\n`;
+
+  try {
+    const getFile = await fetch(url, {
+      headers: { Authorization: `token ${token}` }
+    });
+
+    if (getFile.status === 401) {
+      localStorage.removeItem("gh_pat_token");
+      return alert("Invalid token. Please try again.");
+    }
+
+    const fileData = await getFile.json();
+
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        Authorization: `token ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: "Update Players.js via live web admin panel",
+        content: btoa(unescape(encodeURIComponent(fileContent))),
+        sha: fileData.sha
+      })
+    });
+
+    if (response.ok) {
+      alert("Success! Changes pushed directly to GitHub. Live website will update for everyone shortly.");
+    } else {
+      alert("Failed to update file on GitHub. Verify your token permissions.");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Connection error when reaching GitHub API.");
+  }
+}
+
+/* ADMIN SYSTEM LOGIC */
+const adminBtn = document.getElementById("admin-add-btn");
+const editModal = document.getElementById("edit-modal");
+const editClose = document.getElementById("edit-modal-close");
+const saveBtn = document.getElementById("save-player-btn");
+const deleteBtn = document.getElementById("delete-player-btn");
+
+const urlParams = new URLSearchParams(window.location.search);
+const isAdmin = urlParams.get('admin') === 'hfdgksdjfhgdsghgfkajahgkvjsdvhbkcjhbdsfvkgsdfkvhjdsbfkvhjsdhgvbsdkjcbfkdsgfkgvbskdjfbhkvsdbgvbhsdjfvbkjsdbfgvsbdhfvgsdbgfhgvsbjdgvbsjdgfvbdsjhgcnbvcnbvcnbvcnvcnbrdfhgfdhgfdkhgfkhgf';
+
+function openEditModal(player = null) {
+  document.getElementById("edit-name").value = player ? player.name : "";
+  document.getElementById("edit-shield").value = player?.ranks["Shield"] || "";
+  document.getElementById("edit-dagger").value = player?.ranks["Dagger"] || "";
+  document.getElementById("edit-mace").value = player?.ranks["Mace"] || "";
+  document.getElementById("edit-bat").value = player?.ranks["Double Bat"] || "";
+  document.getElementById("edit-glove").value = player?.ranks["Freeze Glove"] || "";
+  document.getElementById("edit-smp").value = player?.ranks["SMP"] || "";
+  document.getElementById("edit-scythe").value = player?.ranks["Scythe"] || "";
+  editModal.classList.add("active");
+}
+
+if (adminBtn) {
+  if (!isAdmin) {
+    adminBtn.style.display = "none";
+  } else {
+    adminBtn.onclick = () => openEditModal();
+  }
+}
+
+if (editModal) {
+  editClose.onclick = () => editModal.classList.remove("active");
+
+  saveBtn.onclick = async () => {
+    const name = document.getElementById("edit-name").value.trim();
+    if (!name) return alert("Please enter a player name.");
+
+    const updatedPlayer = {
+      name: name,
+      image: "",
+      ranks: {
+        "Shield": document.getElementById("edit-shield").value.trim(),
+        "Dagger": document.getElementById("edit-dagger").value.trim(),
+        "Mace": document.getElementById("edit-mace").value.trim(),
+        "Double Bat": document.getElementById("edit-bat").value.trim(),
+        "Freeze Glove": document.getElementById("edit-glove").value.trim(),
+        "SMP": document.getElementById("edit-smp").value.trim(),
+        "Scythe": document.getElementById("edit-scythe").value.trim()
+      }
+    };
+
+    const index = players.findIndex(p => p.name.toLowerCase() === name.toLowerCase());
+    if (index > -1) {
+      players[index] = updatedPlayer;
+    } else {
+      players.push(updatedPlayer);
+    }
+
+    localStorage.setItem("custom_players", JSON.stringify(players));
+    renderContent();
+    editModal.classList.remove("active");
+
+    await pushToGitHub(players);
+  };
+
+  deleteBtn.onclick = async () => {
+    const name = document.getElementById("edit-name").value.trim();
+    if (!name) return alert("Please enter the exact name of the player to delete.");
+
+    const index = players.findIndex(p => p.name.toLowerCase() === name.toLowerCase());
+    if (index === -1) return alert("Player not found.");
+
+    if (confirm(`Are you sure you want to delete ${players[index].name}?`)) {
+      players.splice(index, 1);
+
+      localStorage.setItem("custom_players", JSON.stringify(players));
+      renderContent();
+      editModal.classList.remove("active");
+
+      await pushToGitHub(players);
+    }
+  };
+}
+
+search.oninput = e => {
+  searchQuery = e.target.value;
+  renderContent();
+};
+
+document.getElementById("modal-close").onclick = () => document.getElementById("modal").classList.remove("active");
+document.getElementById("modal").onclick = e => {
+  if (e.target.id === "modal") e.currentTarget.classList.remove("active");
+};
+
+renderTabs();
+renderContent();
