@@ -4,6 +4,11 @@ const categories = ["Overall", "Shield", "Dagger", "Mace", "Double Bat", "Freeze
 const tierPoints = { "S+": 100, S: 92, "A+": 84, A: 76, "B+": 68, B: 58, C: 45, D: 30, L: -100, "Kai Yeeps": -9999999999999999, "HT1": 100, "LT1": 92, "HT2": 84, "LT2": 76, "HT3": 68, "LT3": 58, "HT4": 45, "LT4": 30, "HT5": 25, "Lt5": 20 };
 const tierOrder = { "S+": 18, S: 17, "A+": 16, A: 15, "B+": 14, B: 13, C: 12, D: 11, "HT1": 10, "LT1": 9, "HT2": 8, "LT2": 7, "HT3": 6, "LT3": 5, "HT4": 4, "LT4": 3, "HT5": 2, "LT5": 1, "Lt5": 1 };
 
+// --- GITHUB CONFIGURATION ---
+const GITHUB_USERNAME = "Coopter2629"; // Replace with your GitHub Username
+const GITHUB_REPO = "YeepsTiers";         // Replace with your repository name
+const FILE_PATH = "./Players.js";               // Path to Players.js inside your repository
+
 let players = JSON.parse(localStorage.getItem("custom_players")) || defaultPlayers;
 let activeCategory = "Overall", searchQuery = "";
 
@@ -42,7 +47,6 @@ function bindOpen() {
   document.querySelectorAll("[data-player]").forEach(node => {
     node.onclick = () => {
       const player = playerByName(node.dataset.player);
-      // If admin mode is active, clicking a player opens the Edit/Delete modal pre-filled
       if (isAdmin) {
         openEditModal(player);
       } else {
@@ -115,6 +119,54 @@ function openModal(player) {
   document.getElementById("modal").classList.add("active");
 }
 
+/* --- GITHUB API AUTO-UPDATE --- */
+async function pushToGitHub(newPlayersArray) {
+  let token = localStorage.getItem("gh_pat_token");
+  if (!token) {
+    token = prompt("Enter your GitHub Personal Access Token to commit changes live:");
+    if (!token) return alert("Operation canceled: No GitHub token provided.");
+    localStorage.setItem("gh_pat_token", token);
+  }
+
+  const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/contents/${FILE_PATH}`;
+  const fileContent = `export const players = ${JSON.stringify(newPlayersArray, null, 2)};\n`;
+
+  try {
+    const getFile = await fetch(url, {
+      headers: { Authorization: `token ${token}` }
+    });
+
+    if (getFile.status === 401) {
+      localStorage.removeItem("gh_pat_token");
+      return alert("Invalid token. Please try again.");
+    }
+
+    const fileData = await getFile.json();
+
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        Authorization: `token ${token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: "Update Players.js via live web admin panel",
+        content: btoa(unescape(encodeURIComponent(fileContent))),
+        sha: fileData.sha
+      })
+    });
+
+    if (response.ok) {
+      alert("Success! Changes pushed directly to GitHub. Live website will update for everyone shortly.");
+    } else {
+      alert("Failed to update file on GitHub. Verify your token permissions.");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Connection error when reaching GitHub API.");
+  }
+}
+
 /* ADMIN SYSTEM LOGIC */
 const adminBtn = document.getElementById("admin-add-btn");
 const editModal = document.getElementById("edit-modal");
@@ -123,7 +175,7 @@ const saveBtn = document.getElementById("save-player-btn");
 const deleteBtn = document.getElementById("delete-player-btn");
 
 const urlParams = new URLSearchParams(window.location.search);
-const isAdmin = urlParams.get('admin') === 'true';
+const isAdmin = urlParams.get('admin') === 'hfdgksdjfhgdsghgfkajahgkvjsdvhbkcjhbdsfvkgsdfkvhjdsbfkvhjsdhgvbsdkjcbfkdsgfkgvbskdjfbhkvsdbgvbhsdjfvbkjsdbfgvsbdhfvgsdbgfhgvsbjdgvbsjdgfvbdsjhgcnbvcnbvcnbvcnvcnbrdfhgfdhgfdkhgfkhgf';
 
 function openEditModal(player = null) {
   document.getElementById("edit-name").value = player ? player.name : "";
@@ -148,7 +200,7 @@ if (adminBtn) {
 if (editModal) {
   editClose.onclick = () => editModal.classList.remove("active");
 
-  saveBtn.onclick = () => {
+  saveBtn.onclick = async () => {
     const name = document.getElementById("edit-name").value.trim();
     if (!name) return alert("Please enter a player name.");
 
@@ -177,13 +229,10 @@ if (editModal) {
     renderContent();
     editModal.classList.remove("active");
 
-    const jsContent = `export const players = ${JSON.stringify(players, null, 2)};\n`;
-    navigator.clipboard.writeText(jsContent).then(() => {
-      alert("Player saved! Code for Players.js copied to clipboard. Paste it into your Players.js file to publish changes for everyone.");
-    });
+    await pushToGitHub(players);
   };
 
-  deleteBtn.onclick = () => {
+  deleteBtn.onclick = async () => {
     const name = document.getElementById("edit-name").value.trim();
     if (!name) return alert("Please enter the exact name of the player to delete.");
 
@@ -197,10 +246,7 @@ if (editModal) {
       renderContent();
       editModal.classList.remove("active");
 
-      const jsContent = `export const players = ${JSON.stringify(players, null, 2)};\n`;
-      navigator.clipboard.writeText(jsContent).then(() => {
-        alert("Player deleted! Updated code for Players.js copied to clipboard. Paste it into Players.js to apply for everyone.");
-      });
+      await pushToGitHub(players);
     }
   };
 }
@@ -214,9 +260,6 @@ document.getElementById("modal-close").onclick = () => document.getElementById("
 document.getElementById("modal").onclick = e => {
   if (e.target.id === "modal") e.currentTarget.classList.remove("active");
 };
-
-renderTabs();
-renderContent();
 
 renderTabs();
 renderContent();
