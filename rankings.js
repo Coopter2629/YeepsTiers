@@ -123,7 +123,7 @@ const saveBtn = document.getElementById("save-player-btn");
 const deleteBtn = document.getElementById("delete-player-btn");
 
 const urlParams = new URLSearchParams(window.location.search);
-const isAdmin = urlParams.get('admin') === 'hfdgksdjfhgdsghgfkajahgkvjsdvhbkcjhbdsfvkgsdfkvhjdsbfkvhjsdhgvbsdkjcbfkdsgfkgvbskdjfbhkvsdbgvbhsdjfvbkjsdbfgvsbdhfvgsdbgfhgvsbjdgvbsjdgfvbdsjhgcnbvcnbvcnbvcnvcnbrdfhgfdhgfdkhgfkhgf';
+const isAdmin = urlParams.get('admin') === 'true';
 
 function openEditModal(player = null) {
   document.getElementById("edit-name").value = player ? player.name : "";
