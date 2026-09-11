@@ -31,7 +31,7 @@
     <section class="page-head">
       <div>
         <h1>PvP Rankings</h1>
-        <p>Overall scores are calculated out of 700 points. (any new tiers will add an extra 100 points)</p>
+        <p>Overall scores are calculated out of 700 points.(any new tiers will add an extra 100 points)</p>
       </div>
       <div style="display: flex; gap: 10px; align-items: center;">
         <label class="search"><input id="search" type="search" placeholder="Search player..."></label>
@@ -48,7 +48,7 @@
     <span>V6.8 Pre-release 1</span>
   </footer>
 
-  <!-- View Player Details Modal -->
+  <!-- View Details Modal -->
   <div id="modal" class="modal">
     <div class="modal-card">
       <button id="modal-close" class="modal-close" aria-label="Close player details">×</button>
@@ -58,24 +58,27 @@
     </div>
   </div>
 
-  <!-- Edit Player Modal -->
+  <!-- Admin Edit/Delete Modal -->
   <div id="edit-modal" class="modal">
     <div class="modal-card">
       <button id="edit-modal-close" class="modal-close">×</button>
-      <h2 id="edit-modal-title">Edit Player</h2>
+      <h2 id="edit-modal-title">Edit / Add Player</h2>
       
       <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
         <label>Name: <input id="edit-name" type="text" placeholder="Player Name"></label>
-        <label>Shield: <input id="edit-shield" type="text" placeholder="HT1 / LT2"></label>
-        <label>Dagger: <input id="edit-dagger" type="text" placeholder="HT1 / LT2"></label>
-        <label>Mace: <input id="edit-mace" type="text" placeholder="HT1 / LT2"></label>
-        <label>Double Bat: <input id="edit-bat" type="text" placeholder="HT1 / LT2"></label>
-        <label>Freeze Glove: <input id="edit-glove" type="text" placeholder="HT1 / LT2"></label>
-        <label>SMP: <input id="edit-smp" type="text" placeholder="HT1 / LT2"></label>
-        <label>Scythe: <input id="edit-scythe" type="text" placeholder="HT1 / LT2"></label>
+        <label>Shield: <input id="edit-shield" type="text" placeholder="e.g. HT1"></label>
+        <label>Dagger: <input id="edit-dagger" type="text" placeholder="e.g. LT2"></label>
+        <label>Mace: <input id="edit-mace" type="text" placeholder="e.g. HT3"></label>
+        <label>Double Bat: <input id="edit-bat" type="text" placeholder="e.g. LT1"></label>
+        <label>Freeze Glove: <input id="edit-glove" type="text" placeholder="e.g. HT2"></label>
+        <label>SMP: <input id="edit-smp" type="text" placeholder="e.g. LT3"></label>
+        <label>Scythe: <input id="edit-scythe" type="text" placeholder="e.g. HT1"></label>
       </div>
 
-      <button id="save-player-btn" class="btn-primary" style="margin-top: 16px; width: 100%;">Save Changes</button>
+      <div style="display: flex; gap: 10px; margin-top: 16px;">
+        <button id="save-player-btn" class="btn-primary" style="flex: 1;">Save Changes</button>
+        <button id="delete-player-btn" class="btn-primary" style="background: var(--blood); flex: 1;">Delete Player</button>
+      </div>
     </div>
   </div>
 
