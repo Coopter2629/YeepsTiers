@@ -1,8 +1,11 @@
-import { players } from "./Players.js";
+import { players as defaultPlayers } from "./Players.js";
 
 const categories = ["Overall", "Shield", "Dagger", "Mace", "Double Bat", "Freeze Glove", "SMP", "Scythe"];
 const tierPoints = { "S+": 100, S: 92, "A+": 84, A: 76, "B+": 68, B: 58, C: 45, D: 30, L: -100, "Kai Yeeps": -9999999999999999, "HT1": 100, "LT1": 92, "HT2": 84, "LT2": 76, "HT3": 68, "LT3": 58, "HT4": 45, "LT4": 30, "HT5": 25, "Lt5": 20 };
-const tierOrder = { "S+": 8, S: 7, "A+": 6, A: 5, "B+": 4, B: 3, C: 2, D: 1, "Ht1": 10, "Lt1": 9, "HT2": 8, "LT2": 7, "HT3": 6, "LT3": 5, "HT4": 4, "LT4": 3, "HT5": 2, "LT5": 1 };
+const tierOrder = { "S+": 18, S: 17, "A+": 16, A: 15, "B+": 14, B: 13, C: 12, D: 11, "HT1": 10, "LT1": 9, "HT2": 8, "LT2": 7, "HT3": 6, "LT3": 5, "HT4": 4, "LT4": 3, "HT5": 2, "LT5": 1, "Lt5": 1 };
+
+// Load custom players if saved in localStorage, otherwise use default file
+let players = JSON.parse(localStorage.getItem("custom_players")) || defaultPlayers;
 
 let activeCategory = "Overall", searchQuery = "";
 
@@ -71,7 +74,7 @@ function renderOverall() {
 }
 
 function renderCategory(category) {
-  const list = visiblePlayers().filter(p => p.ranks[category]).sort((a, b) => tierOrder[b.ranks[category]] - tierOrder[a.ranks[category]]);
+  const list = visiblePlayers().filter(p => p.ranks[category]).sort((a, b) => (tierOrder[b.ranks[category]] || 0) - (tierOrder[a.ranks[category]] || 0));
   if (!list.length) {
     content.innerHTML = `<div class="empty-state">No players ranked in ${category}.</div>`;
     return;
@@ -84,7 +87,7 @@ function renderCategory(category) {
       <section class="tier-block">
         <div class="tier-head"><span class="tier-badge">${t} Tier</span><span class="tier-count">${group.length} player${group.length === 1 ? "" : "s"}</span></div>
         <div class="player-grid">
-          ${group.map(p => `<article class="player-chip" data-player="${p.name}">${avatar(p)}<div><div class="player-name">${p.name}</div><div class="player-rank">${calculateScore(p)}/1000 overall</div></div></article>`).join("")}
+          ${group.map(p => `<article class="player-chip" data-player="${p.name}">${avatar(p)}<div><div class="player-name">${p.name}</div><div class="player-rank">${calculateScore(p)}/700 overall</div></div></article>`).join("")}
         </div>
       </section>
     `;
@@ -100,8 +103,60 @@ function openModal(player) {
   const score = calculateScore(player);
   document.getElementById("modal-title").textContent = player.name;
   document.getElementById("modal-text").textContent = `${rankName(score)} • ${score}/700 Overall Points`;
-  document.getElementById("modal-categories").innerHTML = Object.entries(player.ranks).map(([c, t]) => `<span class="category-chip">${c}: ${t}</span>`).join("");
+  document.getElementById("modal-categories").innerHTML = Object.entries(player.ranks).map(([c, t]) => `<span class="category-chip">${c}: ${t || 'Untested'}</span>`).join("");
   document.getElementById("modal").classList.add("active");
+}
+
+/* ADMIN EDIT MODAL LOGIC */
+const adminBtn = document.getElementById("admin-add-btn");
+const editModal = document.getElementById("edit-modal");
+const editClose = document.getElementById("edit-modal-close");
+const saveBtn = document.getElementById("save-player-btn");
+
+if (adminBtn && editModal) {
+  adminBtn.onclick = () => {
+    document.getElementById("edit-name").value = "";
+    document.getElementById("edit-shield").value = "";
+    document.getElementById("edit-dagger").value = "";
+    document.getElementById("edit-mace").value = "";
+    document.getElementById("edit-bat").value = "";
+    document.getElementById("edit-glove").value = "";
+    document.getElementById("edit-smp").value = "";
+    document.getElementById("edit-scythe").value = "";
+    editModal.classList.add("active");
+  };
+
+  editClose.onclick = () => editModal.classList.remove("active");
+
+  saveBtn.onclick = () => {
+    const name = document.getElementById("edit-name").value.trim();
+    if (!name) return alert("Please enter a player name.");
+
+    const updatedPlayer = {
+      name: name,
+      image: "",
+      ranks: {
+        "Shield": document.getElementById("edit-shield").value.trim(),
+        "Dagger": document.getElementById("edit-dagger").value.trim(),
+        "Mace": document.getElementById("edit-mace").value.trim(),
+        "Double Bat": document.getElementById("edit-bat").value.trim(),
+        "Freeze Glove": document.getElementById("edit-glove").value.trim(),
+        "SMP": document.getElementById("edit-smp").value.trim(),
+        "Scythe": document.getElementById("edit-scythe").value.trim()
+      }
+    };
+
+    const index = players.findIndex(p => p.name.toLowerCase() === name.toLowerCase());
+    if (index > -1) {
+      players[index] = updatedPlayer;
+    } else {
+      players.push(updatedPlayer);
+    }
+
+    localStorage.setItem("custom_players", JSON.stringify(players));
+    renderContent();
+    editModal.classList.remove("active");
+  };
 }
 
 search.oninput = e => {
