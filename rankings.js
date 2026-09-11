@@ -113,7 +113,7 @@ const saveBtn = document.getElementById("save-player-btn");
 const deleteBtn = document.getElementById("delete-player-btn");
 
 const urlParams = new URLSearchParams(window.location.search);
-const isAdmin = urlParams.get('admin') === 'true';
+const isAdmin = urlParams.get('admin') === 'hfdgksdjfhgdsghgfkajahgkvjsdvhbkcjhbdsfvkgsdfkvhjdsbfkvhjsdhgvbsdkjcbfkdsgfkgvbskdjfbhkvsdbgvbhsdjfvbkjsdbfgvsbdhfvgsdbgfhgvsbjdgvbsjdgfvbdsjhgcnbvcnbvcnbvcnvcnbrdfhgfdhgfdkhgfkhgf';
 
 if (adminBtn) {
   if (!isAdmin) {
