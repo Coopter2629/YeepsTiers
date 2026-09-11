@@ -39,7 +39,17 @@ function playerByName(name) {
 }
 
 function bindOpen() {
-  document.querySelectorAll("[data-player]").forEach(node => node.onclick = () => openModal(playerByName(node.dataset.player)));
+  document.querySelectorAll("[data-player]").forEach(node => {
+    node.onclick = () => {
+      const player = playerByName(node.dataset.player);
+      // If admin mode is active, clicking a player opens the Edit/Delete modal pre-filled
+      if (isAdmin) {
+        openEditModal(player);
+      } else {
+        openModal(player);
+      }
+    };
+  });
 }
 
 function renderTabs() {
@@ -115,21 +125,23 @@ const deleteBtn = document.getElementById("delete-player-btn");
 const urlParams = new URLSearchParams(window.location.search);
 const isAdmin = urlParams.get('admin') === 'hfdgksdjfhgdsghgfkajahgkvjsdvhbkcjhbdsfvkgsdfkvhjdsbfkvhjsdhgvbsdkjcbfkdsgfkgvbskdjfbhkvsdbgvbhsdjfvbkjsdbfgvsbdhfvgsdbgfhgvsbjdgvbsjdgfvbdsjhgcnbvcnbvcnbvcnvcnbrdfhgfdhgfdkhgfkhgf';
 
+function openEditModal(player = null) {
+  document.getElementById("edit-name").value = player ? player.name : "";
+  document.getElementById("edit-shield").value = player?.ranks["Shield"] || "";
+  document.getElementById("edit-dagger").value = player?.ranks["Dagger"] || "";
+  document.getElementById("edit-mace").value = player?.ranks["Mace"] || "";
+  document.getElementById("edit-bat").value = player?.ranks["Double Bat"] || "";
+  document.getElementById("edit-glove").value = player?.ranks["Freeze Glove"] || "";
+  document.getElementById("edit-smp").value = player?.ranks["SMP"] || "";
+  document.getElementById("edit-scythe").value = player?.ranks["Scythe"] || "";
+  editModal.classList.add("active");
+}
+
 if (adminBtn) {
   if (!isAdmin) {
     adminBtn.style.display = "none";
   } else {
-    adminBtn.onclick = () => {
-      document.getElementById("edit-name").value = "";
-      document.getElementById("edit-shield").value = "";
-      document.getElementById("edit-dagger").value = "";
-      document.getElementById("edit-mace").value = "";
-      document.getElementById("edit-bat").value = "";
-      document.getElementById("edit-glove").value = "";
-      document.getElementById("edit-smp").value = "";
-      document.getElementById("edit-scythe").value = "";
-      editModal.classList.add("active");
-    };
+    adminBtn.onclick = () => openEditModal();
   }
 }
 
@@ -202,6 +214,9 @@ document.getElementById("modal-close").onclick = () => document.getElementById("
 document.getElementById("modal").onclick = e => {
   if (e.target.id === "modal") e.currentTarget.classList.remove("active");
 };
+
+renderTabs();
+renderContent();
 
 renderTabs();
 renderContent();
