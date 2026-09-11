@@ -1,21 +1,30 @@
 import { players as defaultPlayers } from "./Players.js";
 
+// ==========================================
+// 1. CONFIGURATION & GAME SETTINGS (YOURS)
+// ==========================================
 const categories = ["Overall", "Shield", "Dagger", "Mace", "Double Bat", "Freeze Glove", "SMP", "Scythe"];
 const tierPoints = { "S+": 100, S: 92, "A+": 84, A: 76, "B+": 68, B: 58, C: 45, D: 30, L: -100, "Kai Yeeps": -9999999999999999, "HT1": 100, "LT1": 92, "HT2": 84, "LT2": 76, "HT3": 68, "LT3": 58, "HT4": 45, "LT4": 30, "HT5": 25, "Lt5": 20 };
 const tierOrder = { "S+": 18, S: 17, "A+": 16, A: 15, "B+": 14, B: 13, C: 12, D: 11, "HT1": 10, "LT1": 9, "HT2": 8, "LT2": 7, "HT3": 6, "LT3": 5, "HT4": 4, "LT4": 3, "HT5": 2, "LT5": 1, "Lt5": 1 };
 
-// --- GITHUB CONFIGURATION ---
-const GITHUB_USERNAME = "Coopter2629"; // Replace with your GitHub Username
-const GITHUB_REPO = "YeepsTiers";         // Replace with your repository name
-const FILE_PATH = "./Players.js";               // Path to Players.js inside your repository
+// ==========================================
+// 2. GITHUB REPOSITORY CONFIG (MODIFIED)
+// Fill these in with your GitHub info!
+// ==========================================
+const GITHUB_USERNAME = "Coopter2629"; // <-- CUSTOMIZED: Your GitHub username
+const GITHUB_REPO = "YeepsTiers";         // <-- CUSTOMIZED: Your GitHub repo name
+const FILE_PATH = "./Players.js";               // <-- CUSTOMIZED: Path to Players.js inside repo
 
+// Load custom local session array if editing locally, otherwise fall back to imported Players.js
 let players = JSON.parse(localStorage.getItem("custom_players")) || defaultPlayers;
 let activeCategory = "Overall", searchQuery = "";
 
+// DOM Elements
 const tabs = document.getElementById("tabs");
 const content = document.getElementById("content");
 const search = document.getElementById("search");
 
+// UI Helpers
 const initials = name => name.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase();
 const avatar = player => `<div class="avatar">${player.image ? `<img src="${player.image}" alt="${player.name}">` : initials(player.name)}</div>`;
 
@@ -43,6 +52,10 @@ function playerByName(name) {
   return players.find(p => p.name === name);
 }
 
+// ==========================================
+// 3. CARD CLICK BINDINGS (MODIFIED)
+// Opens edit modal if Admin, else details modal
+// ==========================================
 function bindOpen() {
   document.querySelectorAll("[data-player]").forEach(node => {
     node.onclick = () => {
@@ -119,7 +132,10 @@ function openModal(player) {
   document.getElementById("modal").classList.add("active");
 }
 
-/* --- GITHUB API AUTO-UPDATE --- */
+// ==========================================
+// 4. GITHUB API PUSH FUNCTION (MODIFIED)
+// Commits updated Players.js live to GitHub
+// ==========================================
 async function pushToGitHub(newPlayersArray) {
   let token = localStorage.getItem("gh_pat_token");
   if (!token) {
@@ -138,7 +154,7 @@ async function pushToGitHub(newPlayersArray) {
 
     if (getFile.status === 401) {
       localStorage.removeItem("gh_pat_token");
-      return alert("Invalid token. Please try again.");
+      return alert("Invalid token. Token removed from storage. Please try again.");
     }
 
     const fileData = await getFile.json();
@@ -167,16 +183,20 @@ async function pushToGitHub(newPlayersArray) {
   }
 }
 
-/* ADMIN SYSTEM LOGIC */
+// ==========================================
+// 5. SECRET URL & ADMIN SYSTEM (CUSTOMIZED)
+// ==========================================
 const adminBtn = document.getElementById("admin-add-btn");
 const editModal = document.getElementById("edit-modal");
 const editClose = document.getElementById("edit-modal-close");
 const saveBtn = document.getElementById("save-player-btn");
 const deleteBtn = document.getElementById("delete-player-btn");
 
+// <-- CUSTOMIZED: Secret URL parameter check
 const urlParams = new URLSearchParams(window.location.search);
 const isAdmin = urlParams.get('admin') === 'hfdgksdjfhgdsghgfkajahgkvjsdvhbkcjhbdsfvkgsdfkvhjdsbfkvhjsdhgvbsdkjcbfkdsgfkgvbskdjfbhkvsdbgvbhsdjfvbkjsdbfgvsbdhfvgsdbgfhgvsbjdgvbsjdgfvbdsjhgcnbvcnbvcnbvcnvcnbrdfhgfdhgfdkhgfkhgf';
 
+// Pre-fill fields when adding or editing a player
 function openEditModal(player = null) {
   document.getElementById("edit-name").value = player ? player.name : "";
   document.getElementById("edit-shield").value = player?.ranks["Shield"] || "";
@@ -191,7 +211,7 @@ function openEditModal(player = null) {
 
 if (adminBtn) {
   if (!isAdmin) {
-    adminBtn.style.display = "none";
+    adminBtn.style.display = "none"; // <-- Hides button for regular visitors
   } else {
     adminBtn.onclick = () => openEditModal();
   }
@@ -200,6 +220,7 @@ if (adminBtn) {
 if (editModal) {
   editClose.onclick = () => editModal.classList.remove("active");
 
+  // <-- CUSTOMIZED: Save/Edit button handling
   saveBtn.onclick = async () => {
     const name = document.getElementById("edit-name").value.trim();
     if (!name) return alert("Please enter a player name.");
@@ -232,6 +253,7 @@ if (editModal) {
     await pushToGitHub(players);
   };
 
+  // <-- CUSTOMIZED: Delete button handling
   deleteBtn.onclick = async () => {
     const name = document.getElementById("edit-name").value.trim();
     if (!name) return alert("Please enter the exact name of the player to delete.");
@@ -251,15 +273,18 @@ if (editModal) {
   };
 }
 
+// Search Bar Listener
 search.oninput = e => {
   searchQuery = e.target.value;
   renderContent();
 };
 
+// Modal Close Listeners
 document.getElementById("modal-close").onclick = () => document.getElementById("modal").classList.remove("active");
 document.getElementById("modal").onclick = e => {
   if (e.target.id === "modal") e.currentTarget.classList.remove("active");
 };
 
+// Initial Render
 renderTabs();
 renderContent();
