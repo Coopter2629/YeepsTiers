@@ -4,9 +4,7 @@ const categories = ["Overall", "Shield", "Dagger", "Mace", "Double Bat", "Freeze
 const tierPoints = { "S+": 100, S: 92, "A+": 84, A: 76, "B+": 68, B: 58, C: 45, D: 30, L: -100, "Kai Yeeps": -9999999999999999, "HT1": 100, "LT1": 92, "HT2": 84, "LT2": 76, "HT3": 68, "LT3": 58, "HT4": 45, "LT4": 30, "HT5": 25, "Lt5": 20 };
 const tierOrder = { "S+": 18, S: 17, "A+": 16, A: 15, "B+": 14, B: 13, C: 12, D: 11, "HT1": 10, "LT1": 9, "HT2": 8, "LT2": 7, "HT3": 6, "LT3": 5, "HT4": 4, "LT4": 3, "HT5": 2, "LT5": 1, "Lt5": 1 };
 
-// Load custom players if saved in local session, otherwise default
 let players = JSON.parse(localStorage.getItem("custom_players")) || defaultPlayers;
-
 let activeCategory = "Overall", searchQuery = "";
 
 const tabs = document.getElementById("tabs");
@@ -107,13 +105,13 @@ function openModal(player) {
   document.getElementById("modal").classList.add("active");
 }
 
-/* ADMIN LOGIC */
+/* ADMIN SYSTEM LOGIC */
 const adminBtn = document.getElementById("admin-add-btn");
 const editModal = document.getElementById("edit-modal");
 const editClose = document.getElementById("edit-modal-close");
 const saveBtn = document.getElementById("save-player-btn");
+const deleteBtn = document.getElementById("delete-player-btn");
 
-// 1. Hide Admin button unless "?admin=true" is in the URL
 const urlParams = new URLSearchParams(window.location.search);
 const isAdmin = urlParams.get('admin') === 'true';
 
@@ -167,13 +165,31 @@ if (editModal) {
     renderContent();
     editModal.classList.remove("active");
 
-    // Copy formatted JavaScript directly to clipboard to update Players.js
     const jsContent = `export const players = ${JSON.stringify(players, null, 2)};\n`;
     navigator.clipboard.writeText(jsContent).then(() => {
       alert("Player saved! Code for Players.js copied to clipboard. Paste it into your Players.js file to publish changes for everyone.");
-    }).catch(() => {
-      alert("Player saved locally!");
     });
+  };
+
+  deleteBtn.onclick = () => {
+    const name = document.getElementById("edit-name").value.trim();
+    if (!name) return alert("Please enter the exact name of the player to delete.");
+
+    const index = players.findIndex(p => p.name.toLowerCase() === name.toLowerCase());
+    if (index === -1) return alert("Player not found.");
+
+    if (confirm(`Are you sure you want to delete ${players[index].name}?`)) {
+      players.splice(index, 1);
+
+      localStorage.setItem("custom_players", JSON.stringify(players));
+      renderContent();
+      editModal.classList.remove("active");
+
+      const jsContent = `export const players = ${JSON.stringify(players, null, 2)};\n`;
+      navigator.clipboard.writeText(jsContent).then(() => {
+        alert("Player deleted! Updated code for Players.js copied to clipboard. Paste it into Players.js to apply for everyone.");
+      });
+    }
   };
 }
 
