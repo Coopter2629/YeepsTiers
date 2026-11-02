@@ -50,7 +50,7 @@ export const players = [
       "Shield": "HT3",
       "Dagger": "HT3",
       "Mace": "Untested",
-      "Double Bat": "HT2",
+      "Double Bat": "LT1",
       "Freeze Glove": "Untested",
       "SMP": "HT2",
       "Scythe": "LT3"
