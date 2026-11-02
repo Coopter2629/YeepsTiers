@@ -245,12 +245,12 @@ export const players = [
     image: "",
     ranks: {
       "Shield": "LT2",
-      "Dagger": "",
+      "Dagger": "HT2",
       "Mace": "LT1",
-      "Double Bat": "LT4",
-      "Freeze Glove": "",
-      "SMP": "",
-      "Scythe": ""
+      "Double Bat": "LT2",
+      "Freeze Glove": "T4",
+      "SMP": "LT2",
+      "Scythe": "HT2"
     }
   },
 
