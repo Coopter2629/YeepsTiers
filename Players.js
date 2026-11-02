@@ -267,7 +267,20 @@ export const players = [
       "Scythe": "LT1"
     }
   },
-
+    
+  {
+    name: "SuperTuber217",
+    image: "",
+    ranks: {
+      "Shield": "LT2",
+      "Dagger": "LT2",
+      "Mace": "HT3",
+      "Double Bat": "HT2",
+      "Freeze Glove": "HT2",
+      "SMP": "LT2",
+      "Scythe": "HT2"
+    }
+  },
        {
     name: "L",
     image: "",
@@ -282,17 +295,4 @@ export const players = [
     }
   },
 ];
-  {
-    name: "SuperTuber217",
-    image: "",
-    ranks: {
-      "Shield": "LT2",
-      "Dagger": "LT2",
-      "Mace": "HT3",
-      "Double Bat": "HT2",
-      "Freeze Glove": "HT2",
-      "SMP": "LT2",
-      "Scythe": "HT2"
-    }
-  },
-   // discord id:1319462923554521148
+
