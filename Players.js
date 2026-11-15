@@ -254,7 +254,21 @@ export const players = [
     }
   },
 
-     {
+ {
+    name: "OsaOsaOsa",
+    image: "",
+    ranks: {
+      "Shield": "LT2",
+      "Dagger": "untested",
+      "Mace": "HT1",
+      "Double Bat": "LT2",
+      "Freeze Glove": "untested",
+      "SMP": "untested",
+      "Scythe": "untested"    
+    }  
+  },     
+  
+    {
     name: "YARSYARSYARS",
     image: "pfps/Yars_pfp.png",
     ranks: {
