@@ -184,7 +184,21 @@ export const players = [
     }
   },
   
-  {
+    {
+    name: "thecrumbetcrusader",
+    image: "",
+    ranks: {
+      "Shield": "Untested",
+      "Dagger": "Untested",
+      "Mace": "Untested",
+      "Double Bat": "HT2",
+      "Freeze Glove": "Untested",
+      "SMP": "Untested",
+      "Scythe": "Untested"
+    }
+  },
+
+    {
     name: "HEAVY_96",
     image: "pfps/Heavy96.jpg",
     ranks: {
