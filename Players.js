@@ -47,11 +47,11 @@ export const players = [
     name: "Castle",
     image: "",
     ranks: {
-      "Shield": "HT3",
-      "Dagger": "HT3",
-      "Mace": "Untested",
+      "Shield": "LT3",
+      "Dagger": "LT2",
+      "Mace": "LT2",
       "Double Bat": "LT1",
-      "Freeze Glove": "Untested",
+      "Freeze Glove": "LT2",
       "SMP": "HT2",
       "Scythe": "LT3"
     }
@@ -64,7 +64,7 @@ export const players = [
       "Shield": "Untested",
       "Dagger": "Untested",
       "Mace": "Untested",
-      "Double Bat": "HT2",
+      "Double Bat": "HT3",
       "Freeze Glove": "Untested",
       "SMP": "Untested",
       "Scythe": "Untested"
@@ -248,7 +248,7 @@ export const players = [
       "Dagger": "HT2",
       "Mace": "LT1",
       "Double Bat": "LT2",
-      "Freeze Glove": "HT",
+      "Freeze Glove": "HT4",
       "SMP": "LT2",
       "Scythe": "HT2"
     }
@@ -258,12 +258,12 @@ export const players = [
     name: "YARSYARSYARS",
     image: "pfps/Yars_pfp.png",
     ranks: {
-      "Shield": "HT3",
-      "Dagger": "LT2",
-      "Mace": "HT2",
+      "Shield": "HT2",
+      "Dagger": "LT3",
+      "Mace": "LT2",
       "Double Bat": "HT3",
-      "Freeze Glove": "HT4",
-      "SMP": "LT2",
+      "Freeze Glove": "HT2",
+      "SMP": "HT2",
       "Scythe": "LT1"
     }
   },
@@ -280,7 +280,37 @@ export const players = [
       "SMP": "LT2",
       "Scythe": "HT2"
     }
-  },
+  }, 
+  
+    {
+    name: "zay",
+    image: "",
+    ranks: {
+      "Shield": "LT4",
+      "Dagger": "LT2",
+      "Mace": "HT4",
+      "Double Bat": "HT4",
+      "Freeze Glove": "LT4",
+      "SMP": "HT2",
+      "Scythe": "untested"
+        
+    }  
+  },  
+    
+     {
+    name: "Connso",
+    image: "",
+    ranks: {
+      "Shield": "untested",
+      "Dagger": "untested",
+      "Mace": "untested",
+      "Double Bat": "LT2",
+      "Freeze Glove": "untested",
+      "SMP": "untested",
+      "Scythe": "untested"
+        
+    }  
+  },  
        {
     name: "L",
     image: "",
