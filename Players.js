@@ -225,8 +225,22 @@ export const players = [
       "Scythe": ""
     }
   },
-  
-     {
+   
+    {
+    name: "Gnome21",
+    image: "",
+    ranks: {
+      "Shield": "Untested",
+      "Dagger": "Untested",
+      "Mace": "Untested",
+      "Double Bat": "LT1",
+      "Freeze Glove": "Untested",
+      "SMP": "Untested",
+      "Scythe": "Untested"
+    }
+  },
+    
+    {
     name: "SpaceLord",
     image: "pfps/Spacelord",
     ranks: {
