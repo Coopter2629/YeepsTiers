@@ -156,7 +156,21 @@ export const players = [
     }
   },
       
-  {
+ {
+    name: "ItsGold",
+    image: "",
+    ranks: {
+      "Shield": "Untested",
+      "Dagger": "Untested",
+      "Mace": "HT3",
+      "Double Bat": "Untested",
+      "Freeze Glove": "Untested",
+      "SMP": "Untested",
+      "Scythe": "LT2"
+    }
+  },
+   
+    {
     name: "KingJaxon",
     image: "pfps/KingJaxon.png",
     ranks: {
@@ -235,7 +249,7 @@ export const players = [
       "Mace": "Untested",
       "Double Bat": "LT1",
       "Freeze Glove": "Untested",
-      "SMP": "Untested",
+      "SMP": "LT2",
       "Scythe": "Untested"
     }
   },
