@@ -93,7 +93,7 @@ export const players = [
       "Shield": "Untested",
       "Dagger": "Untested",
       "Mace": "Untested",
-      "Double Bat": "Kai yeeps",
+      "Double Bat": "Kai Yeeps",
       "Freeze Glove": "Untested",
       "SMP": "Untested",
       "Scythe": "Untested"
