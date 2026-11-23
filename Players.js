@@ -85,7 +85,21 @@ export const players = [
       "Scythe": ""
     }
   },
-      
+    
+      {
+    name: "Noah E",
+    image: "",
+    ranks: {
+      "Shield": "Untested",
+      "Dagger": "Untested",
+      "Mace": "Untested",
+      "Double Bat": "Kai yeep",
+      "Freeze Glove": "Untested",
+      "SMP": "Untested",
+      "Scythe": "Untested"
+    }
+  },
+    
     {
     name: "WooperYeeps",
     image: "pfps/WooperYeeps.png",
