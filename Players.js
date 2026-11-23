@@ -141,7 +141,21 @@ export const players = [
       "Scythe": "LT2"
     }
   },
-      
+    
+{
+    name: "Soul_Yeep",
+    image: "",
+    ranks: {
+      "Shield": "HT4",
+      "Dagger": "Untested",
+      "Mace": "Untested",
+      "Double Bat": "Untested",
+      "Freeze Glove": "Untested",
+      "SMP": "Untested",
+      "Scythe": "Untested"
+    }
+  },    
+    
 {
     name: "Crazy_I_Was_Crazy",
     image: "",
